@@ -20,7 +20,7 @@
 
         <Grid x:Name="canvasGrid" Margin="5,47,5,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             <local:Canvas x:Name="canvasCanvas" Background="Black">
-         
+                
             </local:Canvas>
         </Grid>
 

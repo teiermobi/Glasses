@@ -23,10 +23,13 @@ namespace Glasses
         public FilterPropsDialog()
         {
             InitializeComponent();
+            main = this;
 
         }
 
+        internal static FilterPropsDialog main;
 
-     
+
+
     }
 }

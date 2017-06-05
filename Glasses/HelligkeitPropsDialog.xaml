@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Helligkeit" MinHeight="140" MinWidth="420" d:DesignWidth="420" d:DesignHeight="110" ResizeMode="NoResize" Width="100" Height="90" Closed="Window_Closed">
     <Grid>
-        <Slider x:Name="BrightnessSlider" Minimum="1" Maximum="16"   TickPlacement="BottomRight" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="313" TickFrequency="1" ValueChanged="BrightnessChanged"/>
+        <Slider x:Name="BrightnessSlider" Minimum="0.5" Maximum="8"   TickPlacement="BottomRight" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="313" TickFrequency="0.5" ValueChanged="BrightnessChanged"/>
         <Label Content="400 %" HorizontalAlignment="Left" Margin="338,72,0,0" VerticalAlignment="Top"/>
         <Label Content="25 %" HorizontalAlignment="Left" Margin="37,72,0,0" VerticalAlignment="Top"/>
         <Label Content="100 %" HorizontalAlignment="Left" Margin="93,72,0,0" VerticalAlignment="Top" Width="45" RenderTransformOrigin="0.809,0.475"/>

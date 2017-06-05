@@ -17,9 +17,14 @@ namespace Glasses
 
         public BrightnessGlass()
         {
-          
+         
         }
 
+        public double SGBrightness
+        {
+            get { return Brightness; }
+            set { Brightness = value; }
+        }
 
         public override void ShowPropsDialog(object sender, EventArgs e)
         {
@@ -36,12 +41,12 @@ namespace Glasses
 
                if(bri == null)
                 {
-                    Brightness = 4;
-                    HelligkeitPropsDialog.valueOld = 4;
+                    this.SGBrightness = 2;
+                    HelligkeitPropsDialog.valueOld = 2;
 
                 } else
                 {
-                    Brightness = bri.Brightness;
+                    this.SGBrightness = bri.Brightness;
                 }
 
                 
@@ -52,13 +57,15 @@ namespace Glasses
                 Color c;
 
 
-                for (int i = 100 - 1; i >= 0; i--)
-                    for (int j = 100 - 1; j >= 0; j--)
+                for (int i = (int)this.Width - 1; i >= 0; i--)
+                    for (int j = (int)this.Height - 1; j >= 0; j--)
                     {
                         c = painting.GetPixel((ox + i), (oy + j));
                         double cR = c.R * Brightness;
                         double cG = c.G * Brightness;
                         double cB = c.B * Brightness;
+                        double cA = 50;
+
 
                         if (cR < 0) cR = 1;
                         if (cR > 255) cR = 255;
@@ -69,7 +76,7 @@ namespace Glasses
                         if (cB < 0) cB = 1;
                         if (cB > 255) cB = 255;
 
-                        painting.SetPixel(ox + i, oy + j, Color.FromRgb((byte)cR, (byte)cG, (byte)cB));
+                        painting.SetPixel(ox + i, oy + j, Color.FromArgb((byte)cA, (byte)cR, (byte)cG, (byte)cB));
 
                     }
 

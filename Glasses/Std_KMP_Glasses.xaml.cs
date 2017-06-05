@@ -59,10 +59,6 @@ namespace Glasses
         }
 
 
-
-
-       
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog of = new OpenFileDialog();
@@ -127,12 +123,18 @@ namespace Glasses
         {
             canvasCanvas.Children.Remove(wa);
             WaterGlass.timmy.Stop();
-            WaterGlass.delta = 10;
+            WaterGlass.delta = 2;
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            IEnumerable<Glass> Glasses = canvasCanvas.Children.OfType<Glass>();
 
+            foreach (var glass in Glasses)
+            {
+                //canvasCanvas.Children.Remove(glass);
+            }
         }
 
 
@@ -142,6 +144,7 @@ namespace Glasses
 
             foreach (var glass in Glasses)
             {
+                glass.FocusBorderColor = Color.FromRgb(0, 0, 0);
                 glass.FocusBorderWidth = 2;
                 glass.PaintBorder();
                 glass.InvalidateVisual();

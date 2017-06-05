@@ -13,12 +13,14 @@ namespace Glasses
 {
    
 
-    public class Glass :  PaintingLib.PainterBase
+    public class Glass : PaintingLib.PainterBase
     {
-        EventHandler Click;
+      //  EventHandler Click;
         Color BorderColor = Color.FromRgb(0,0,0);
         double BorderWidth = 5;
         int ispressed = 0;
+        int isscaling = 0;
+ 
 
         public Glass()
         {
@@ -26,17 +28,15 @@ namespace Glasses
             this.Height = 100;
             this.HorizontalAlignment = HorizontalAlignment.Left;
             this.VerticalAlignment = VerticalAlignment.Top;
-            this.MinWidth = 100;
-            this.Margin = new Thickness(120, 80, 0, 0);
-            
-            
-
+            this.Margin = new Thickness(0, 0, 0, 0);
+            this.Cursor = Cursors.Hand;
         }
 
-        public int IsPressed
+
+        public Color FocusBorderColor
         {
-            get { return ispressed; }
-            set { ispressed = value; }
+            get { return (Color)BorderColor; }
+            set { BorderColor = value; }
         }
 
         public int FocusBorderWidth
@@ -44,6 +44,21 @@ namespace Glasses
             get { return (int)BorderWidth; }
             set { BorderWidth = value; }
         }
+
+
+        public int IsPressed
+        {
+            get { return ispressed; }
+            set { ispressed = value; }
+        }
+
+        public int IsScaling
+        {
+            get { return isscaling; }
+            set { isscaling = value; }
+        }
+
+      
 
 
         public void PaintBorder()
@@ -64,7 +79,7 @@ namespace Glasses
             menuItem1.Header = "Eigenschaften";
             menuItem1.Click += new RoutedEventHandler(ShowPropsDialog);
             menuItem2.Header = "Löschen";
-            menuItem2.Click += new RoutedEventHandler(HelligkeitProps_Remove);
+            menuItem2.Click += new RoutedEventHandler(Props_Remove);
             menuItem3.Header = "In den Hintergrund";
             menuItem4.Header = "In den Vordergrund";
             this.ContextMenu.Items.Add(menuItem4);
@@ -77,19 +92,13 @@ namespace Glasses
 
         public virtual void ShowPropsDialog(object sender, EventArgs e)
         {
-            //HelligkeitPropsDialog bri = new HelligkeitPropsDialog();
-            //bri.ShowDialog();
+            
         }
 
-        private void HelligkeitProps_Remove(object sender, EventArgs e)
+        private void Props_Remove(object sender, EventArgs e)
         {
             Std_KMP_Glasses.main.canvasCanvas.Children.Remove(this);
         }
-
-      
-
-     
-
 
 
     }
