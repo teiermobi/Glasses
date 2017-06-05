@@ -127,15 +127,16 @@ namespace Glasses
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_Demo1(object sender, RoutedEventArgs e)
         {
             IEnumerable<Glass> Glasses = canvasCanvas.Children.OfType<Glass>();
 
             foreach (var glass in Glasses)
             {
-                //canvasCanvas.Children.Remove(glass);
+                glass.Removing();
             }
         }
+
 
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
