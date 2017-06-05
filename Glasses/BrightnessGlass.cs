@@ -66,7 +66,6 @@ namespace Glasses
                         double cB = c.B * Brightness;
                         double cA = 50;
 
-
                         if (cR < 0) cR = 1;
                         if (cR > 255) cR = 255;
 
@@ -75,6 +74,7 @@ namespace Glasses
 
                         if (cB < 0) cB = 1;
                         if (cB > 255) cB = 255;
+                        
 
                         painting.SetPixel(ox + i, oy + j, Color.FromArgb((byte)cA, (byte)cR, (byte)cG, (byte)cB));
 
