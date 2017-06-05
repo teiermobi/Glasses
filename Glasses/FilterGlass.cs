@@ -48,7 +48,7 @@ namespace Glasses
 
             // Mask =  { { -3, -1}, {2, -2 } };
 
-            int[,] array2D2 = { { -1, 2, -1 }, 
+            int[,] array2D2 = { { -1, 0, -1 }, 
                                 { 0, 5, 0 }, 
                                 { -1, 0, -1 } }; //Hier noch den Variablen Wert einbauen anstatt "3"
 
@@ -57,6 +57,7 @@ namespace Glasses
             Point childPos = this.TranslatePoint(new Point(), Parent as PaintingLib.CanvasBase);
             int ox = (int)childPos.X, oy = (int)childPos.Y;
             Color c;
+            double cR = 0.0, cG = 0.0, cB = 0.0;
 
             //Jeweilige Pixel des Fensters
             for (int i = (int)this.Width - 1; i >= 0; i--)
@@ -65,16 +66,15 @@ namespace Glasses
                     c = painting.GetPixel((ox + i), (oy + j));
 
                     // Matrixgröße abfragen
-                    for (int column = 0; column <= 2; column++) //Hier noch den Variablen Wert einbauen anstatt "3"
+                    for (int column = 0; column < 3; column++) //Hier noch den Variablen Wert einbauen anstatt "3"
                     {
-                        for (int row = 0; row < 2; row++) //Hier noch den Variablen Wert einbauen anstatt "3"
+                        for (int row = 0; row < 3; row++) //Hier noch den Variablen Wert einbauen anstatt "3"
                         {
 
-                            
-                            double cR = c.R  * array2D2[row, column];
-                            double cG = c.G  * array2D2[row, column];
-                            double cB = c.B  * array2D2[row, column];
-                
+                             cR += c.R  * array2D2[row, column];
+                             cG += c.G  * array2D2[row, column];
+                             cB += c.B  * array2D2[row, column];
+
                             painting.SetPixel(ox + i, oy + j, Color.FromRgb((byte)cR, (byte)cG, (byte)cB));
                         }
                     }
