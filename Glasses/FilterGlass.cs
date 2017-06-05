@@ -43,10 +43,10 @@ namespace Glasses
 
                 painting.Lock();
 
-            //Mask =  {
-            //    { -3, -1},
-            //            { 2, -2 }
-            //};
+            Mask =  {
+                { -3, -1},
+                        { 2, -2 }
+            };
 
 
 
