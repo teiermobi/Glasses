@@ -68,6 +68,11 @@ namespace Glasses
             this.InvalidateVisual();
         }
 
+        public void Removing()
+        {
+            Std_KMP_Glasses.main.canvasCanvas.Children.Remove(this);
+        }
+
         public void showContextmenu()
         {
             this.ContextMenu = new System.Windows.Controls.ContextMenu();
