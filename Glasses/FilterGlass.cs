@@ -48,38 +48,33 @@ namespace Glasses
 
             // Mask =  { { -3, -1}, {2, -2 } };
 
-            int[,] array2D2 = { { -1, -1, -1 }, 
-                                { -1, 8, -1 }, 
-                                { -1, -1, -1 } }; //Hier noch den Variablen Wert einbauen anstatt "3"
+            int[,] array2D2 = { { -1, 0, -1 }, 
+                                { 0, 5, 0 }, 
+                                { -1, 0, -1 } }; //Hier noch den Variablen Wert einbauen anstatt "3"
 
 
             Size size = CalcActualSize();
             Point childPos = this.TranslatePoint(new Point(), Parent as PaintingLib.CanvasBase);
             int ox = (int)childPos.X, oy = (int)childPos.Y;
             Color c;
+            double cR = 0.0, cG = 0.0, cB = 0.0;
 
             //Jeweilige Pixel des Fensters
             for (int i = (int)this.Width - 1; i >= 0; i--)
                 for (int j = (int)this.Height - 1; j >= 0; j--)
                 {
                     c = painting.GetPixel((ox + i), (oy + j));
-                    
-
-
-
 
                     // Matrixgröße abfragen
-                    for (int column = 0; column <= 2; column++) //Hier noch den Variablen Wert einbauen anstatt "3"
+                    for (int column = 0; column < 3; column++) //Hier noch den Variablen Wert einbauen anstatt "3"
                     {
-                        for (int row = 0; row < 2; row++) //Hier noch den Variablen Wert einbauen anstatt "3"
+                        for (int row = 0; row < 3; row++) //Hier noch den Variablen Wert einbauen anstatt "3"
                         {
 
-                           
-                            //Wir brauch pro Pixel einen wert! nicht mit RGB...
-                            double cR = c.R  * (array2D2[row, column])*(1/9);
-                            double cG = c.G  * (array2D2[row, column])*(1/9);
-                            double cB = c.B  * (array2D2[row, column])*(1/9);
-                
+                             cR += c.R  * array2D2[row, column];
+                             cG += c.G  * array2D2[row, column];
+                             cB += c.B  * array2D2[row, column];
+
                             painting.SetPixel(ox + i, oy + j, Color.FromRgb((byte)cR, (byte)cG, (byte)cB));
                         }
                     }

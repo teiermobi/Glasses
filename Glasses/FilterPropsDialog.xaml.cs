@@ -19,7 +19,7 @@ namespace Glasses
     /// </summary>
     public partial class FilterPropsDialog : Window
     {
-       
+
         public FilterPropsDialog()
         {
             InitializeComponent();
@@ -29,7 +29,13 @@ namespace Glasses
 
         internal static FilterPropsDialog main;
 
-
+        public void GetMask()
+        {
+            //IEnumerable<Glass> Glasses = FilterPropsDialog.main.Children.OfType<Glass>();
+            //foreach (var glass in Glasses)
+            //{
+            //}
+        }
 
     }
 }
