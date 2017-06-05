@@ -80,7 +80,7 @@ namespace Glasses
 
                     }
 
-
+                
                 painting.Unlock();
      
         }
