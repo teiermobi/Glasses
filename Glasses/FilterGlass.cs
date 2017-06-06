@@ -48,9 +48,9 @@ namespace Glasses
 
             // Mask =  { { -3, -1}, {2, -2 } };
 
-            int[,] array2D2 = { { -1, 0, -1 }, 
-                                { 0, 5, 0 }, 
-                                { -1, 0, -1 } }; //Hier noch den Variablen Wert einbauen anstatt "3"
+            int[,] array2D2 = { { 3, 1, -1 }, 
+                                { 3, 1, -1 }, 
+                                { 3, 1, -1} }; //Hier noch den Variablen Wert einbauen anstatt "3"
 
 
             Size size = CalcActualSize();
@@ -66,14 +66,15 @@ namespace Glasses
                     c = painting.GetPixel((ox + i), (oy + j));
 
                     // Matrixgröße abfragen
-                    for (int column = 0; column < 3; column++) //Hier noch den Variablen Wert einbauen anstatt "3"
+                    for (int column = 0; column < 3; column++)    //Hier noch den Variablen Wert einbauen anstatt "3"
                     {
-                        for (int row = 0; row < 3; row++) //Hier noch den Variablen Wert einbauen anstatt "3"
+                        for (int row = 0; row < 3; row++)         //Hier noch den Variablen Wert einbauen anstatt "3"
                         {
 
-                             cR += c.R  * array2D2[row, column];
-                             cG += c.G  * array2D2[row, column];
-                             cB += c.B  * array2D2[row, column];
+                             cR = c.R *  array2D2[row, column];
+                             cG = c.G *  array2D2[row, column];
+                             cB = c.B *  array2D2[row, column];
+
 
                             painting.SetPixel(ox + i, oy + j, Color.FromRgb((byte)cR, (byte)cG, (byte)cB));
                         }
