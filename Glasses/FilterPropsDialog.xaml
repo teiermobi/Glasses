@@ -20,7 +20,7 @@
         <ScrollBar x:Name="Offset" Margin="84,40,153,14" SmallChange="1" Maximum="5" Minimum="1"  Grid.Column="0"/>
 
         <GroupBox  Grid.Row="1" x:Name="groupBox" Header="Maske" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Height="131" Width="244">
-            <Grid  Margin="5">
+            <Grid x:Name="rasterGrid" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />

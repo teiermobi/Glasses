@@ -27,6 +27,12 @@ namespace Glasses
 
         }
 
+        public double Textbox
+        {
+            get { return Convert.ToDouble(textBox.Text); }
+            set { textBox.Text = value.ToString(); }
+        }
+
         internal static FilterPropsDialog main;
 
         public void GetMask()
