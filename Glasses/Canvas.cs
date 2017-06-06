@@ -48,6 +48,9 @@ namespace Glasses
                     glass.FocusBorderWidth = 5;
                     glass.PaintBorder();
                     glass.InvalidateVisual();
+                } else
+                {
+                    
                 }
 
             }

@@ -81,6 +81,14 @@ namespace Glasses
 
             he = new BrightnessGlass();
             he.Name = "Helligkeit" + index++;
+            if (Std_KMP_Glasses.main.checkBox.IsChecked ?? true)
+            {
+                he.FocusBorderColor = Color.FromRgb(0, 0, 0);
+                he.FocusBorderWidth = 2;
+                he.PaintBorder();
+            }
+            else
+            {}
             canvasCanvas.Children.Add(he);
             he.showContextmenu();
             he.InvalidateVisual();
@@ -99,6 +107,15 @@ namespace Glasses
         {
             fi = new FilterGlass();
             fi.Name = "Filter" + index++;
+            if (Std_KMP_Glasses.main.checkBox.IsChecked ?? true)
+            {
+                fi.FocusBorderColor = Color.FromRgb(0, 0, 0);
+                fi.FocusBorderWidth = 2;
+                fi.PaintBorder();
+            }
+            else
+            { }
+            
             canvasCanvas.Children.Add(fi);
             fi.showContextmenu();
             fi.InvalidateVisual();
@@ -113,6 +130,15 @@ namespace Glasses
         {
             wa = new WaterGlass();
             wa.Name = "Wasser" + index++;
+            if (Std_KMP_Glasses.main.checkBox.IsChecked ?? true)
+            {
+                wa.FocusBorderColor = Color.FromRgb(0, 0, 0);
+                wa.FocusBorderWidth = 2;
+                wa.PaintBorder();
+            }
+            else
+            {}
+            
             canvasCanvas.Children.Add(wa);
             wa.showContextmenu();
             wa.InvalidateVisual();
@@ -127,14 +153,37 @@ namespace Glasses
 
         }
 
+        
+
         private void Button_Click_Demo1(object sender, RoutedEventArgs e)
         {
-            IEnumerable<Glass> Glasses = canvasCanvas.Children.OfType<Glass>();
+            
+            canvasCanvas.Children.Clear();
 
-            foreach (var glass in Glasses)
-            {
-                glass.Removing();
-            }
+            fi = new FilterGlass();
+            fi.Name = "Filter" + index++;
+            fi.FocusBorderColor = Color.FromRgb(0, 0, 220);
+            fi.FocusBorderWidth = 2;
+            fi.PaintBorder();
+            fi.Margin = new Thickness(80, 20, 0, 0);
+            fi.Width = 200;
+            fi.Height = 120;
+            canvasCanvas.Children.Add(fi);
+            fi.showContextmenu();
+            fi.InvalidateVisual();
+
+            he = new BrightnessGlass();
+            he.Name = "Helligkeit" + index++;
+            he.FocusBorderColor = Color.FromRgb(0, 0, 220);
+            he.FocusBorderWidth = 2;
+            he.PaintBorder();
+            he.Margin = new Thickness(120, 120, 0, 0);
+            he.Width = 70;
+            he.Height = 70;
+            canvasCanvas.Children.Add(he);
+            he.showContextmenu();
+            he.InvalidateVisual();
+
         }
 
 

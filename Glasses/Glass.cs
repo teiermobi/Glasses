@@ -86,13 +86,27 @@ namespace Glasses
             menuItem2.Header = "Löschen";
             menuItem2.Click += new RoutedEventHandler(Props_Remove);
             menuItem3.Header = "In den Hintergrund";
+            menuItem3.Click += new RoutedEventHandler(Change_ZindexMinus);
             menuItem4.Header = "In den Vordergrund";
+            menuItem4.Click += new RoutedEventHandler(Change_ZindexPlus);
             this.ContextMenu.Items.Add(menuItem4);
             this.ContextMenu.Items.Add(menuItem3);
             this.ContextMenu.Items.Add(menuItem2);
             this.ContextMenu.Items.Add(menuItem1);
         }
 
+
+        private void Change_ZindexMinus(object sender, EventArgs e)
+        {
+            int ind = Canvas.GetZIndex(this);
+            Canvas.SetZIndex(this, ind - 1 );
+        }
+
+        private void Change_ZindexPlus(object sender, EventArgs e)
+        {
+            int ind = Canvas.GetZIndex(this);
+            Canvas.SetZIndex(this, ind + 1);
+        }
 
 
         public virtual void ShowPropsDialog(object sender, EventArgs e)
