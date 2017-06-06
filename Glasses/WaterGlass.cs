@@ -19,7 +19,7 @@ namespace Glasses
 
         public WaterGlass()
         {
-            timmy.Interval = new TimeSpan(0, 0, 0, 0, 24);
+            timmy.Interval = new TimeSpan(0, 0, 0, 0, 1);
             timmy.Tick += Timmy_Tick;
             this.Distortion = 4;
 

@@ -24,8 +24,8 @@ namespace Glasses
 
         public Glass()
         {
-            this.Width = 100;
-            this.Height = 100;
+            this.Width = 60;
+            this.Height = 60;
             this.HorizontalAlignment = HorizontalAlignment.Left;
             this.VerticalAlignment = VerticalAlignment.Top;
             this.Margin = new Thickness(0, 0, 0, 0);
