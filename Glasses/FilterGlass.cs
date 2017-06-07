@@ -19,7 +19,7 @@ namespace Glasses
 
         public FilterGlass()
         {
-            this.Mask = new double[,] { { -1, 0, -1 }, { 0, 2, 0 }, { -1, 0, -1 } };
+            this.Mask = new double[,] { { -1, 0, -1 }, { 0, 5, 0 }, {-1, 0, -1 } };
         }
 
 
@@ -48,49 +48,51 @@ namespace Glasses
             Size size = CalcActualSize();
             Point childPos = this.TranslatePoint(new Point(), Parent as PaintingLib.CanvasBase);
             int ox = (int)childPos.X, oy = (int)childPos.Y;
-            Color c;
-            double blue = 0;
-            double green = 0;
-            double red = 0;
 
-
+            Color[,] result = new Color[(int)this.Width, (int)this.Height];
+            Color imageColor;
             for (int i = (int)this.Width - 1; i >= 0; i--)
+            {
                 for (int j = (int)this.Height - 1; j >= 0; j--)
                 {
-                    c = painting.GetPixel((ox + i), (oy + j));
+                    double red = 0;
+                    double green = 0.0;
+                    double blue = 0.0;
+                    // c = painting.GetPixel((ox + i), (oy + j));
 
-                    // Matrixgröße abfragen
-                    for (int column = 0; column < Mask.GetLength(1); column++)  
+                    for (int filterX = 0; filterX < Mask.GetLength(1); filterX++)
                     {
-                        for (int row = 0; row < Mask.GetLength(0); row++)        
+                        for (int filterY = 0; filterY < Mask.GetLength(0); filterY++)
                         {
-                            
-                             red = c.R * Mask[row, column];
-                             green = c.G * Mask[row, column];
-                             blue = c.B * Mask[row, column];
-                             //cA = c.A * mask[row, column];
+                            int imageX = (i - Mask.GetLength(1) / 2 + filterX + (int)this.Width) % (int)this.Width;
+                            int imageY = (j - Mask.GetLength(0) / 2 + filterY + (int)this.Height) % (int)this.Height;
+
+                            imageColor = painting.GetPixel(ox + imageX, oy + imageY);
+
+                            red += imageColor.R * Mask[filterX, filterY];
+                            green += imageColor.G * Mask[filterX, filterY];
+                            blue += imageColor.B * Mask[filterX, filterY];
                         }
-                       
+
+                        int r = Math.Min(Math.Max((int)(red), 0), 255);
+                        int g = Math.Min(Math.Max((int)(green), 0), 255);
+                        int b = Math.Min(Math.Max((int)(blue), 0), 255);
+
+                        result[i, j] = Color.FromRgb((byte)r, (byte)g, (byte)b);
                     }
-                    //if (blue > 255)
-                    //{ blue = 255; }
-                    //else if (blue < 0)
-                    //{ blue = 0; }
 
-
-                    //if (green > 255)
-                    //{ green = 255; }
-                    //else if (green < 0)
-                    //{ green = 0; }
-
-
-                    //if (red > 255)
-                    //{ red = 255; }
-                    //else if (red < 0)
-                    //{ red = 0; }
-                    painting.SetPixel(ox + i, oy + j, Color.FromRgb((byte)red, (byte)green, (byte)blue));
                 }
-            
+               
+            }
+
+            for (int k = 0; k < (int)this.Width; ++k)
+            {
+                for (int l = 0; l < (int)this.Height; ++l)
+                {
+                    painting.SetPixel(ox + k, oy + l, result[k, l]);
+                }
+            }
+
             painting.Unlock();
         }
 

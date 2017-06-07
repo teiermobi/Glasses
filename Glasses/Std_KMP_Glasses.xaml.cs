@@ -31,8 +31,11 @@ namespace Glasses
         {
             InitializeComponent();
             main = this;
+            
+         
  
         }
+ 
         internal static Std_KMP_Glasses main;
        
 

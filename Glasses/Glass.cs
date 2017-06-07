@@ -30,6 +30,7 @@ namespace Glasses
             this.VerticalAlignment = VerticalAlignment.Top;
             this.Margin = new Thickness(0, 0, 0, 0);
             this.Cursor = Cursors.Hand;
+            this.IsPressed = 0;
         }
 
 

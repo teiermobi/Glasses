@@ -18,12 +18,14 @@ namespace Glasses
 {
     public class Canvas : PaintingLib.CanvasBase
     {
+        Canvas c;
         public EventHandler<EventArgs> NewMouseEvent;
         public Image IMG;
         public string ISource;
 
         public Canvas()
         {
+            
             this.MouseLeftButtonDown += new MouseButtonEventHandler(Canvas_MouseLeftButtonDown);
             this.MouseLeftButtonUp += new MouseButtonEventHandler(Canvas_MouseLeftButtonUp);
             this.MouseMove += new MouseEventHandler(Canvas_MouseMove);
@@ -47,10 +49,12 @@ namespace Glasses
                     glass.FocusBorderColor = Color.FromRgb(255, 30, 50);
                     glass.FocusBorderWidth = 5;
                     glass.PaintBorder();
+                    glass.IsPressed = 1;
                     glass.InvalidateVisual();
-                } else
+                } else if (glass.Margin.Left + glass.ActualWidth - 10 <= e.GetPosition(this).X + 10 && glass.Margin.Left + glass.ActualWidth + 10 >= e.GetPosition(this).X - 10 || glass.Margin.Top + glass.ActualHeight - 10 <= e.GetPosition(this).Y + 10 && glass.Margin.Top + glass.ActualHeight + 10 >= e.GetPosition(this).Y - 10)
                 {
-                    
+                    glass.IsScaling = 1;
+                    glass.IsPressed = 0;
                 }
 
             }
@@ -68,38 +72,38 @@ namespace Glasses
 
                 // Glass verschieben
 
-                if (e.OriginalSource == glass && e.LeftButton == MouseButtonState.Pressed)
+                if (e.OriginalSource == glass && e.LeftButton == MouseButtonState.Pressed && glass.IsPressed == 1)
                 {
                     glass.Margin = new Thickness(e.GetPosition(glass).X + glass.Margin.Left - MouseDownLocation.X, e.GetPosition(glass).Y + glass.Margin.Top - MouseDownLocation.Y, 0, 0);
                 }
 
                 //// Glass skalieren
 
-                //else if (glass.Margin.Left + glass.ActualWidth - 5 <= e.GetPosition(this).X && glass.Margin.Left + glass.ActualWidth  >= e.GetPosition(this).X || glass.Margin.Top + glass.ActualHeight - 5 <= e.GetPosition(this).Y && glass.Margin.Top + glass.ActualHeight  >= e.GetPosition(this).Y)
-                //{
-                //    this.Cursor = Cursors.SizeNWSE;
-                //    if (e.LeftButton == MouseButtonState.Pressed && this.Cursor == Cursors.SizeNWSE)
-                //    {
-                //        glass.PaintBorder();
+                else if (glass.Margin.Left + glass.ActualWidth - 10 <= e.GetPosition(this).X + 10 && glass.Margin.Left + glass.ActualWidth + 10 >= e.GetPosition(this).X - 10 || glass.Margin.Top + glass.ActualHeight - 10 <= e.GetPosition(this).Y + 10 && glass.Margin.Top + glass.ActualHeight + 10 >= e.GetPosition(this).Y - 10)
+                {
+                    this.Cursor = Cursors.SizeNWSE;
+                    if (glass.IsPressed == 0 && glass.IsScaling == 1)
+                    {
+                        glass.PaintBorder();
 
-                //        if (e.GetPosition(this).Y - glass.Margin.Top > 0 && e.GetPosition(this).X - glass.Margin.Left > 0)
-                //        {
-                //            glass.Height = e.GetPosition(this).Y - glass.Margin.Top;
-                //            glass.Width = e.GetPosition(this).X - glass.Margin.Left;
-                //        }
-                //        else
-                //        {
+                        if (e.GetPosition(this).Y - glass.Margin.Top > 0 && e.GetPosition(this).X - glass.Margin.Left > 0)
+                        {
+                            glass.Height = e.GetPosition(this).Y - glass.Margin.Top;
+                            glass.Width = e.GetPosition(this).X - glass.Margin.Left;
+                        }
+                        else
+                        {
 
-                //        }
-                //        glass.InvalidateVisual();
-                //    }
-                //    else
-                //    {
+                        }
+                        glass.InvalidateVisual();
+                    }
+                    else
+                    {
 
 
-                //    }
+                    }
 
-                //}
+                }
                 else
                 {
                      this.Cursor = Cursors.Arrow;
@@ -117,7 +121,13 @@ namespace Glasses
 
             foreach (var glass in Glasses)
             {
-                
+                    if(glass.IsPressed == 1)
+                    {
+                        glass.IsPressed = 0;
+                    } else if(glass.IsScaling == 1)
+                    {
+                        glass.IsScaling = 0;
+                    }
                     if (Std_KMP_Glasses.main.checkBox.IsChecked ?? true)
                     {
                         glass.FocusBorderColor = Color.FromRgb(0, 0, 0);

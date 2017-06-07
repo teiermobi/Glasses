@@ -34,9 +34,7 @@ namespace Glasses
 
         public override void Paint(PaintingLib.BitmapEditor painting)
         {
-            
-           
-      
+
                 painting.Lock();
 
                if(bri == null)
@@ -60,7 +58,7 @@ namespace Glasses
                 for (int i = (int)this.Width - 1; i >= 0; i--)
                     for (int j = (int)this.Height - 1; j >= 0; j--)
                     {
-                        c = painting.GetPixel((ox + i), (oy + j));
+                        c = painting.GetPixel((ox + i), (oy + j));              
                         double cR = c.R * Brightness;
                         double cG = c.G * Brightness;
                         double cB = c.B * Brightness;
@@ -74,14 +72,14 @@ namespace Glasses
 
                         if (cB < 0) cB = 1;
                         if (cB > 255) cB = 255;
-                        
 
-                        painting.SetPixel(ox + i, oy + j, Color.FromArgb((byte)cA, (byte)cR, (byte)cG, (byte)cB));
 
-                    }
+                    painting.SetPixel(ox + i, oy + j, Color.FromArgb((byte)cA, (byte)cR, (byte)cG, (byte)cB));
 
-                
-                painting.Unlock();
+                }
+           
+
+            painting.Unlock();
      
         }
 
