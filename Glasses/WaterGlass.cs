@@ -17,24 +17,65 @@ namespace Glasses
 
         internal static DispatcherTimer timmy = new DispatcherTimer();
 
+        internal static double delta = 0.0;
+        double s, dd, d, dl;
+        enum GlassWaserType { Strudel, Welle };
+        int typ = 0;
+        int iorg, jorg;
+        Color c;
+
         public WaterGlass()
         {
-            timmy.Interval = new TimeSpan(0, 0, 0, 0, 1);
+            timmy.Interval = new TimeSpan(0, 0, 0, 0, 24);
             timmy.Tick += Timmy_Tick;
-            this.Distortion = 4;
+            this.Distortion = 31;
+            this.DistortionDelta = 0;
+            this.DistortionLimit = 80;
+            this.WaveDensity = 0.3;
 
             if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this)) timmy.Start();
         }
 
-     
 
-        internal static double delta = 0.0;
-        public double distortion;
+
+        public int WaterTyp
+        {
+            get { return  typ; }
+            set { typ = value; }
+        }
+
+        public double DistortionLimit
+        {
+            get { return dl; }
+            set { dl = value; }
+        }
 
         public double Distortion
         {
-            get { return (double)distortion; }
-            set { distortion = value; }
+            get { return (double)s; }
+            set
+            {
+                if(this.DistortionLimit > value && value > -Math.Abs(this.DistortionLimit))
+                {
+                    s = value;
+                } else
+                {
+                    s = 80;
+                }
+                
+            }
+        }
+
+        public double DistortionDelta
+        {
+            get { return (double)dd; }
+            set { dd = value; }
+        }
+
+        public double WaveDensity
+        {
+            get { return (double)d; }
+            set { d = value; }
         }
 
 
@@ -42,7 +83,6 @@ namespace Glasses
         private void Timmy_Tick(object sender, EventArgs e)
         {
             delta++;
-            
             InvalidateVisual();
         }
 
@@ -57,30 +97,42 @@ namespace Glasses
                 Size size = CalcActualSize();
                 Point childPos = this.TranslatePoint(new Point(), Parent as PaintingLib.CanvasBase);
                 int ox = (int)childPos.X, oy = (int)childPos.Y;
+
+                
+
                 int sX = (int)this.Width;
                 int sY = (int)this.Height;
                 
-                Color c;
+                
 
 
 
-                for (int i = sX - 1; i >= 0; i--)
-                        for (int j = sY - 1; j >= 0; j--)
-                        {
-                            int iorg = ox + i + ((int)this.Distortion * (int)Math.Cos(ox + i * 200));
-                            int jorg = oy + j + ((int)this.Distortion * (int)Math.Sin(oy + j * 200));
-                            c = painting.GetPixel((ox + i), (oy + j));
-                            double cR = c.R;
-                            double cG = c.G;
-                            double cB = c.B;
-                            //if (delta <= this.Width)
-                            painting.SetPixel(ox  + i , oy  + j, painting.GetPixel(iorg , jorg));  //+(int)jorg + (int)iorg
+            for (int i = sX - 1; i >= 0; i--)
+            {
+                    for (int j = sY - 1; j >= 0; j--)
+                    {
+                            
+                    iorg = (ox + i) + (int)this.Distortion *  (int)Math.Cos((int)this.Distortion  + (i + ox)  * this.WaveDensity);
+                    jorg = (oy + j) + (int)this.Distortion *  (int)Math.Sin((int)this.Distortion  + (j + oy)  * this.WaveDensity);
 
-                }
+                    Point childPosA = this.TranslatePoint(new Point(iorg,jorg), Parent as PaintingLib.CanvasBase);
+                    int oa = (int)childPosA.X, ob = (int)childPosA.Y;
 
-               
-                   painting.Unlock();
-                } 
+                    c = painting.GetPixel(oa + i, ob + j);
+
+                    //painting.SetPixel(ox + iorg, oy + jorg, Color.FromRgb((byte)c.R, (byte)c.G, (byte)c.G));
+                    //painting.SetPixel(ox + i, oy + j, painting.GetPixel(iorg + i + (int)delta, jorg + j + (int)delta));
+                    painting.SetPixel(ox + i, oy + j, Color.FromRgb((byte)c.R, (byte)c.G, (byte)c.B));
+
+                    }
+            }
+
+
+            
+
+
+            painting.Unlock();
+        } 
         
 
     }
