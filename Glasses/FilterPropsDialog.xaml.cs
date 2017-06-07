@@ -26,12 +26,75 @@ namespace Glasses
             main = this;
 
         }
+        //class FilterTypeClass
+        //{
+        //    public void filterTypeClass(int filterTypeId, string filterTypeDescr)
+        //    {
+        //        this.FilterTypeId = filterTypeId;
+        //        this.FilterTypeDescr = filterTypeDescr;
+        //    }
+        //    public int FilterTypeId;
+        //    public string FilterTypeDescr;
+        //    public override string ToString()
+        //    {
+        //        return (FilterTypeDescr);
+        //    }
+        //}
+
+        //FilterTypeClass FilterTypes;
+
+        //private void FilterTypes_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    if (FilterTypes.SelectedIndex >= 0)
+        //    {
+        //        FilterTypeId.Text = ((PetTypeClass)FilterTypes.SelectedItem).PetTypeId.ToString();
+        //    }
+        //    else
+        //    {
+        //        FilterTypeId.Text = "Keine Auswahl bei ListBox";
+        //    }
+        //}
+
+
+        //FilterTypeClass[] PetTypeItems = new FilterTypeClass[]
+        //{
+        //    new FilterTypeClass(1, "Kontrast"),
+        //    new FilterTypeClass(2, "Kanten"),
+        //    new FilterTypeClass(3, "Benutzerdef."),
+
+        //};
+        //FilterTypes.ItemsSource = FilterTypeItems
+
+        public class ComboboxItem
+        {
+            public string Text { get; set; }
+            public object Value { get; set; }
+
+            public override string ToString()
+            {
+                return Text;
+            }
+        }
+
+        //ComboboxItem item = new ComboboxItem();
+        //item.Text = "Item text1";
+        //item.Value = 12;
+
+        //comboBox1.Items.Add(item);
+
+        //comboBox1.SelectedIndex = 0;
+
+        //MessageBox.Show((comboBox1.SelectedItem as ComboboxItem).Value.ToString());
+
+
 
         public double Textbox
         {
             get { return Convert.ToDouble(textBox.Text); }
             set { textBox.Text = value.ToString(); }
         }
+
+        
 
         internal static FilterPropsDialog main;
 
@@ -43,5 +106,9 @@ namespace Glasses
             //}
         }
 
+    }
+
+    internal class PetTypeClass
+    {
     }
 }

@@ -37,7 +37,15 @@ namespace Glasses
         }
  
         internal static Std_KMP_Glasses main;
-       
+
+
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+           // Vielleicht hierdurch das canvasCanvas laden lassen !?
+           //canvasCanvas. ..
+        }
 
         private void WindoW_SizeChanged(object sender, SizeChangedEventArgs e)
         {

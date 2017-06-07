@@ -44,10 +44,10 @@
 
             </Grid>
         </GroupBox>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="53,9,0,0" VerticalAlignment="Top" Width="87" >
-            <ComboBoxItem IsSelected="True">Kontrast</ComboBoxItem>
+        <ComboBox x:Name="comboBoxFilter" HorizontalAlignment="Left" Margin="53,9,0,0" VerticalAlignment="Top" Width="87" ItemsSource="{Binding Filter}" >
+            <!--<ComboBoxItem IsSelected="True">Kontrast</ComboBoxItem>
             <ComboBoxItem >Kanten</ComboBoxItem>
-            <ComboBoxItem>Benutzerdef.</ComboBoxItem>
+            <ComboBoxItem>Benutzerdef.</ComboBoxItem>-->
         </ComboBox>
 
     </Grid>
