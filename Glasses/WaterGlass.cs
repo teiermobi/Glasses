@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace Glasses
 {
-    //test
+    
     public class WaterGlass : Glass
     {
 
