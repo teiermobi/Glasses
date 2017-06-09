@@ -24,46 +24,11 @@ namespace Glasses
         {
             InitializeComponent();
             main = this;
+            
 
         }
-        //class FilterTypeClass
-        //{
-        //    public void filterTypeClass(int filterTypeId, string filterTypeDescr)
-        //    {
-        //        this.FilterTypeId = filterTypeId;
-        //        this.FilterTypeDescr = filterTypeDescr;
-        //    }
-        //    public int FilterTypeId;
-        //    public string FilterTypeDescr;
-        //    public override string ToString()
-        //    {
-        //        return (FilterTypeDescr);
-        //    }
-        //}
-
-        //FilterTypeClass FilterTypes;
-
-        //private void FilterTypes_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    if (FilterTypes.SelectedIndex >= 0)
-        //    {
-        //        FilterTypeId.Text = ((PetTypeClass)FilterTypes.SelectedItem).PetTypeId.ToString();
-        //    }
-        //    else
-        //    {
-        //        FilterTypeId.Text = "Keine Auswahl bei ListBox";
-        //    }
-        //}
 
 
-        //FilterTypeClass[] PetTypeItems = new FilterTypeClass[]
-        //{
-        //    new FilterTypeClass(1, "Kontrast"),
-        //    new FilterTypeClass(2, "Kanten"),
-        //    new FilterTypeClass(3, "Benutzerdef."),
-
-        //};
-        //FilterTypes.ItemsSource = FilterTypeItems
 
         public class ComboboxItem
         {
@@ -76,15 +41,25 @@ namespace Glasses
             }
         }
 
-        //ComboboxItem item = new ComboboxItem();
-        //item.Text = "Item text1";
-        //item.Value = 12;
 
-        //comboBox1.Items.Add(item);
+        public List<string> FilterSource
+        {
+            get
+            {
+                List<string> filterSource = new List<string>();
+                
+                filterSource.Add("Kanten");
+                filterSource.Add("Kontrast");
+                filterSource.Add("Benutzerdef.");
+                //fontNamesSource = Fonts.SystemFontFamilies.Select(ff => ff.Source).ToList();
 
-        //comboBox1.SelectedIndex = 0;
-
-        //MessageBox.Show((comboBox1.SelectedItem as ComboboxItem).Value.ToString());
+                return filterSource;
+            }
+            set
+            {
+                FilterSource = value;
+            }
+        }
 
 
 
@@ -94,7 +69,7 @@ namespace Glasses
             set { textBox.Text = value.ToString(); }
         }
 
-        
+
 
         internal static FilterPropsDialog main;
 
@@ -106,9 +81,19 @@ namespace Glasses
             //}
         }
 
-    }
+        private void comboBoxFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (comboBoxFilter.SelectedItem.ToString() == "Kanten")
+            {
+                //FilterGlass kante new FilterGlass();
+                //Console.Write("Hier");
+            }
 
-    internal class PetTypeClass
-    {
+            else if(comboBoxFilter.SelectedItem.ToString() == "Kontrast")
+            {
+
+            }
+
+        }
     }
 }

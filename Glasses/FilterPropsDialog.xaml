@@ -4,6 +4,7 @@
     	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     	xmlns:local="clr-namespace:Glasses"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
     	mc:Ignorable="d"
     	Title="Filter"  ResizeMode="NoResize" Width="268.667" Height="265.334">
     <Grid Margin="5">
@@ -44,11 +45,9 @@
 
             </Grid>
         </GroupBox>
-        <ComboBox x:Name="comboBoxFilter" HorizontalAlignment="Left" Margin="53,9,0,0" VerticalAlignment="Top" Width="87" ItemsSource="{Binding Filter}" >
-            <!--<ComboBoxItem IsSelected="True">Kontrast</ComboBoxItem>
-            <ComboBoxItem >Kanten</ComboBoxItem>
-            <ComboBoxItem>Benutzerdef.</ComboBoxItem>-->
-        </ComboBox>
+        <ComboBox x:Name="comboBoxFilter" HorizontalAlignment="Left" Margin="53,9,0,0" VerticalAlignment="Top" Width="87" ItemsSource="{Binding Path=FilterSource }"  SelectionChanged="comboBoxFilter_SelectionChanged" />
+
+
 
     </Grid>
 
