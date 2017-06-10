@@ -20,10 +20,11 @@ namespace Glasses
 
         public FilterGlass()
         {
-            this.Mask = new double[,] { { -1, 0, -1 }, { 0, 5, 0 }, {-1, 0, -1 } };
+            main = this;
+            this.Mask = new double[,] { { -1, 0, -1 }, { 0, 5, 0 }, { -1, 0, -1 } };
         }
 
-
+        internal static FilterGlass main;
         //private double[,] Mask = new double[3, 3];
 
         //access array through indexer /*https://www.daniweb.com/programming/software-development/threads/301123/accessors-for-an-multidemensional-array */
@@ -39,8 +40,6 @@ namespace Glasses
         {
             fi = new FilterPropsDialog();
             fi.ShowDialog();
-          
-
         }
 
         public override void Paint(PaintingLib.BitmapEditor painting)
@@ -60,7 +59,6 @@ namespace Glasses
                     double red = 0;
                     double green = 0.0;
                     double blue = 0.0;
-                    // c = painting.GetPixel((ox + i), (oy + j));
 
                     for (int filterX = 0; filterX < Mask.GetLength(1); filterX++)
                     {
@@ -86,7 +84,6 @@ namespace Glasses
                 }
                
             }
-
             for (int k = 0; k < (int)this.Width; ++k)
             {
                 for (int l = 0; l < (int)this.Height; ++l)
@@ -94,10 +91,7 @@ namespace Glasses
                     painting.SetPixel(ox + k, oy + l, result[k, l]);
                 }
             }
-
             painting.Unlock();
         }
-
-
     }
 }

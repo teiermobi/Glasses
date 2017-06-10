@@ -24,6 +24,33 @@ namespace Glasses
             InitializeComponent();
             main = this;
             comboBoxFilter.SelectedIndex = 0;
+            OffsetDisp.Text = "3";
+           
+
+
+          //  IEnumerable<TextBox> TextBoxes = this.rasterGrid.Children.OfType<TextBox>();
+
+          
+        //    for (int b = 0; b <= FilterGlass.main.Mask.GetLength(0) * FilterGlass.main.Mask.GetLength(1); b++)
+        //    {
+        //        TextBox tb = new TextBox();
+                
+        //        for (int i = 0; i < FilterGlass.main.Mask.GetLength(0); i++)
+        //        {
+        //            for (int j = 0; j < FilterGlass.main.Mask.GetLength(1); j++)
+        //            {
+        //                double s = FilterGlass.main.Mask[i +1, j+1];
+                       
+        //                    tb.Text = s.ToString();
+        //                    this.rasterGrid.Children.Add(tb);
+
+
+
+        //            }
+
+        //        }
+        //    }
+
         }
 
         internal static FilterPropsDialog main;
@@ -70,7 +97,7 @@ namespace Glasses
 
 
 
-       
+
 
         public void GetMask()
         {
