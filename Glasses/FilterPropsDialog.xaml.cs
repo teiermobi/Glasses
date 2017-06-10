@@ -19,16 +19,14 @@ namespace Glasses
     /// </summary>
     public partial class FilterPropsDialog : Window
     {
-
         public FilterPropsDialog()
         {
             InitializeComponent();
             main = this;
-            
-
+            comboBoxFilter.SelectedIndex = 0;
         }
 
-
+        internal static FilterPropsDialog main;
 
         public class ComboboxItem
         {
@@ -52,6 +50,7 @@ namespace Glasses
                 filterSource.Add("Kontrast");
                 filterSource.Add("Benutzerdef.");
                 //fontNamesSource = Fonts.SystemFontFamilies.Select(ff => ff.Source).ToList();
+                
 
                 return filterSource;
             }
@@ -71,7 +70,7 @@ namespace Glasses
 
 
 
-        internal static FilterPropsDialog main;
+       
 
         public void GetMask()
         {
@@ -83,16 +82,16 @@ namespace Glasses
 
         private void comboBoxFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (comboBoxFilter.SelectedItem.ToString() == "Kanten")
-            {
-                //FilterGlass kante new FilterGlass();
-                //Console.Write("Hier");
-            }
+            //if (comboBoxFilter.SelectedItem.ToString() == "Kanten")
+            //{
+            //    //FilterGlass kante new FilterGlass();
+            //    //Console.Write("Hier");
+            //}
 
-            else if(comboBoxFilter.SelectedItem.ToString() == "Kontrast")
-            {
+            //else if(comboBoxFilter.SelectedItem.ToString() == "Kontrast")
+            //{
 
-            }
+            //}
 
         }
     }

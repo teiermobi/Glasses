@@ -18,7 +18,7 @@ namespace Glasses
 {
     public class Canvas : PaintingLib.CanvasBase
     {
-        Canvas c;
+     //   Canvas c;
         public EventHandler<EventArgs> NewMouseEvent;
         public Image IMG;
         public string ISource;
