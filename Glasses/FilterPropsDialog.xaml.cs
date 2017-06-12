@@ -24,7 +24,7 @@ namespace Glasses
         {
             InitializeComponent();
             main = this;
-            comboBoxFilter.SelectedIndex = 0;
+            comboBoxFilter.SelectedIndex = intOld;
             OffsetDisp.Text = "3";
 
 
@@ -82,6 +82,8 @@ namespace Glasses
         }
 
 
+        public string filterName;
+
 
         internal static FilterPropsDialog main;
 
@@ -111,9 +113,9 @@ namespace Glasses
             get
             {
                 List<string> filterSource = new List<string>();
-                
-                filterSource.Add("Kanten");
+
                 filterSource.Add("Kontrast");
+                filterSource.Add("Kanten");
                 filterSource.Add("Benutzerdef.");
                 //fontNamesSource = Fonts.SystemFontFamilies.Select(ff => ff.Source).ToList();
                 
@@ -146,18 +148,30 @@ namespace Glasses
             //}
         }
 
+        public string Filter_Name
+        {
+            get { return filterName; }
+            set { filterName = value; }
+        }
+
+
+        public static int intOld;
+
         private void comboBoxFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //if (comboBoxFilter.SelectedItem.ToString() == "Kanten")
-            //{
-            //    //FilterGlass kante new FilterGlass();
-            //    //Console.Write("Hier");
-            //}
+            if (comboBoxFilter.SelectedItem.ToString() == "Kontrast")
+            {
+                filterName = "Kontrast";
+                intOld = comboBoxFilter.SelectedIndex;
+                Std_KMP_Glasses.main.canvasCanvas.InvalidateVisual();
+            }
 
-            //else if(comboBoxFilter.SelectedItem.ToString() == "Kontrast")
-            //{
-
-            //}
+            else if(comboBoxFilter.SelectedItem.ToString() == "Kanten")
+            {
+                filterName = "Kanten";
+                intOld = comboBoxFilter.SelectedIndex;
+                Std_KMP_Glasses.main.canvasCanvas.InvalidateVisual();
+            }
 
         }
     }
