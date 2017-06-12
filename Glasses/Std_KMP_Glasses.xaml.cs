@@ -160,8 +160,6 @@ namespace Glasses
         {
             canvasCanvas.Children.Remove(wa);
             WaterGlass.timmy.Stop();
-            WaterGlass.delta = 2;
-
         }
 
         

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
+//using System.Timers;
 using System.Windows.Input;
 
 namespace Glasses
@@ -17,31 +18,30 @@ namespace Glasses
 
         internal static DispatcherTimer timmy = new DispatcherTimer();
 
-        internal static double delta = 0.0;
         double s, dd, d, dl;
-        enum GlassWaserType { Strudel, Welle };
-        int typ = 0;
+        public enum WaterGlassType { Strudel, Welle };
+        WaterGlassType type = WaterGlassType.Welle;
         int iorg, jorg;
         Color c;
 
         public WaterGlass()
         {
-            timmy.Interval = new TimeSpan(0, 0, 0, 0, 24);
+            timmy.Interval = new TimeSpan(0, 0, 0, 0, 40); //25 mal pro Sekunde
             timmy.Tick += Timmy_Tick;
-            this.Distortion = 31;
-            this.DistortionDelta = 0;
-            this.DistortionLimit = 80;
-            this.WaveDensity = 0.3;
+            this.DistortionLimit = 80.0;
+            this.Distortion = 0.0;
+            this.DistortionDelta = 1.0;
+            this.WaveDensity = 0.1;
 
             if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this)) timmy.Start();
         }
 
 
 
-        public int WaterTyp
+        public WaterGlassType WaterType
         {
-            get { return  typ; }
-            set { typ = value; }
+            get { return type; }
+            set { type = value; }
         }
 
         public double DistortionLimit
@@ -55,12 +55,13 @@ namespace Glasses
             get { return (double)s; }
             set
             {
-                if(this.DistortionLimit > value && value > -Math.Abs(this.DistortionLimit))
+                if( value <= DistortionLimit && value >= -DistortionLimit) //DistortionLimit ist immer positiv
                 {
                     s = value;
-                } else
+                }
+                else
                 {
-                    s = 80;
+                    s = 0;
                 }
                 
             }
@@ -82,7 +83,15 @@ namespace Glasses
 
         private void Timmy_Tick(object sender, EventArgs e)
         {
-            delta++;
+            if (Distortion == DistortionLimit || Distortion == -DistortionLimit)
+            {
+                dd = -dd;
+            }
+            if (Distortion <= DistortionLimit && Distortion >= -DistortionLimit)
+            {
+                Distortion += dd;
+            }
+
             InvalidateVisual();
         }
 
@@ -98,35 +107,32 @@ namespace Glasses
                 Point childPos = this.TranslatePoint(new Point(), Parent as PaintingLib.CanvasBase);
                 int ox = (int)childPos.X, oy = (int)childPos.Y;
 
-                
+                 
 
                 int sX = (int)this.Width;
                 int sY = (int)this.Height;
-                
-                
 
 
 
-            for (int i = sX - 1; i >= 0; i--)
+
+
+            if (WaterType == WaterGlassType.Welle)
             {
+                for (int i = sX - 1; i >= 0; i--)
+                {
                     for (int j = sY - 1; j >= 0; j--)
                     {
-                            
-                    iorg = (ox + i) + (int)this.Distortion *  (int)Math.Cos((int)this.Distortion  + (i + ox)  * this.WaveDensity);
-                    jorg = (oy + j) + (int)this.Distortion *  (int)Math.Sin((int)this.Distortion  + (j + oy)  * this.WaveDensity);
 
-                    Point childPosA = this.TranslatePoint(new Point(iorg,jorg), Parent as PaintingLib.CanvasBase);
-                    int oa = (int)childPosA.X, ob = (int)childPosA.Y;
+                        iorg = (int)((ox + i) + this.Distortion * Math.Cos((i + ox) * this.WaveDensity));
+                        jorg = (int)((oy + j) + this.Distortion * Math.Sin((j + oy) * this.WaveDensity));
 
-                    c = painting.GetPixel(oa + i, ob + j);
+                        c = painting.GetPixel( iorg, jorg );
 
-                    //painting.SetPixel(ox + iorg, oy + jorg, Color.FromRgb((byte)c.R, (byte)c.G, (byte)c.G));
-                    //painting.SetPixel(ox + i, oy + j, painting.GetPixel(iorg + i + (int)delta, jorg + j + (int)delta));
-                    painting.SetPixel(ox + i, oy + j, Color.FromRgb((byte)c.R, (byte)c.G, (byte)c.B));
+                        painting.SetPixel(ox + i, oy + j, c);
 
                     }
+                }
             }
-
 
             
 

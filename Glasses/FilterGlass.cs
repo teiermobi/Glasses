@@ -56,7 +56,7 @@ namespace Glasses
             {
                 for (int j = (int)this.Height - 1; j >= 0; j--)
                 {
-                    double red = 0;
+                    double red = 0.0;
                     double green = 0.0;
                     double blue = 0.0;
 

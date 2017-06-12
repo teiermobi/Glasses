@@ -35,7 +35,7 @@ namespace Glasses
         public override void Paint(PaintingLib.BitmapEditor painting)
         {
 
-                painting.Lock();
+               painting.Lock();
 
                if(bri == null)
                 {

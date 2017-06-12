@@ -56,8 +56,8 @@ namespace Glasses
             //myGrid.RowDefinitions.Add(rowDef3);
             //groupBox.Content = myGrid;
 
-                for (int i = 0; i < FilterGlass.main.Mask.GetLength(0); i++ )
-                {
+            for (int i = 0; i < FilterGlass.main.Mask.GetLength(0); i++ )
+            {
                     for (int j = 0; j < FilterGlass.main.Mask.GetLength(1); j++ )
                     {
                         double s = FilterGlass.main.Mask[i, j];
