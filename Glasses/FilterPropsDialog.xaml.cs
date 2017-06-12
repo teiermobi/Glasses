@@ -22,10 +22,13 @@ namespace Glasses
     {
         public FilterPropsDialog()
         {
+            //
             InitializeComponent();
             main = this;
-            comboBoxFilter.SelectedIndex = intOld;
-            OffsetDisp.Text = "3";
+            comboBoxFilter.SelectedIndex = intOld;  //gespeicherten ComboBox Item Index ausgeben
+            this.OffsetDisp.Text = "3";
+
+
 
 
 
@@ -174,5 +177,37 @@ namespace Glasses
             }
 
         }
+
+        private void OffsetDisp_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //OffsetDisp.Text = "3";
+            
+            //if(e.New)
+
+            //{
+            //    Offset.Value = offset;
+
+            //}
+        }
+
+        
+
+        private void Offset_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (e.NewValue > e.OldValue)
+            {
+                int old = int.Parse(OffsetDisp.Text);
+                old -= 1;
+                OffsetDisp.Text = old.ToString();
+            }
+            else
+            {
+                int neu = int.Parse(OffsetDisp.Text);
+                neu += 1;
+                OffsetDisp.Text = neu.ToString();
+            }
+        }
+
+
     }
 }

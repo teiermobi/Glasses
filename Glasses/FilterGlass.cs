@@ -39,6 +39,7 @@ namespace Glasses
         public override void ShowPropsDialog(object sender, EventArgs e)
         {
             fi = new FilterPropsDialog();
+            
             fi.ShowDialog();
         }
 
