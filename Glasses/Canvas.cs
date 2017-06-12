@@ -23,9 +23,9 @@ namespace Glasses
         public Image IMG;
         public string ISource;
 
+        // Zuweisung der MouseEventhandler (siehe unten) und des Standardbildes
         public Canvas()
-        {
-            
+        {  
             this.MouseLeftButtonDown += new MouseButtonEventHandler(Canvas_MouseLeftButtonDown);
             this.MouseLeftButtonUp += new MouseButtonEventHandler(Canvas_MouseLeftButtonUp);
             this.MouseMove += new MouseEventHandler(Canvas_MouseMove);
@@ -33,16 +33,17 @@ namespace Glasses
         }
 
 
-
+        // MouseEventhandler 
         private Point MouseDownLocation;
         private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 
             IEnumerable<Glass> Glasses = Std_KMP_Glasses.main.canvasCanvas.Children.OfType<Glass>();
 
+            // Für jedes Glas auf Canvas
             foreach (var glass in Glasses)
             {
-                
+                // Wird auf ein Glass gedrückt, Rahmen dicker zeichnen
                 if (e.OriginalSource == glass)
                 {
                     MouseDownLocation = new Point(e.GetPosition(glass).X, e.GetPosition(glass).Y);
@@ -51,6 +52,8 @@ namespace Glasses
                     glass.PaintBorder();
                     glass.IsPressed = 1;
                     glass.InvalidateVisual();
+
+                // Wird am Rand des Glases gedrückt
                 } else if (glass.Margin.Left + glass.ActualWidth - 10 <= e.GetPosition(this).X + 10 && glass.Margin.Left + glass.ActualWidth + 10 >= e.GetPosition(this).X - 10 || glass.Margin.Top + glass.ActualHeight - 10 <= e.GetPosition(this).Y + 10 && glass.Margin.Top + glass.ActualHeight + 10 >= e.GetPosition(this).Y - 10)
                 {
                     glass.IsScaling = 1;
@@ -61,7 +64,7 @@ namespace Glasses
         }
 
 
-            // Wenn Maus bewegt wird (innerhalb dann nur wenn zusätzlich auch die Maustaste gedrückt ist)
+        // Wenn Maus bewegt wird (innerhalb dann nur wenn zusätzlich auch die Maustaste gedrückt ist)
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
@@ -77,7 +80,7 @@ namespace Glasses
                     glass.Margin = new Thickness(e.GetPosition(glass).X + glass.Margin.Left - MouseDownLocation.X, e.GetPosition(glass).Y + glass.Margin.Top - MouseDownLocation.Y, 0, 0);
                 }
 
-                //// Glass skalieren
+                // Glass skalieren
 
                 else if (glass.Margin.Left + glass.ActualWidth - 10 <= e.GetPosition(this).X + 10 && glass.Margin.Left + glass.ActualWidth + 10 >= e.GetPosition(this).X - 10 || glass.Margin.Top + glass.ActualHeight - 10 <= e.GetPosition(this).Y + 10 && glass.Margin.Top + glass.ActualHeight + 10 >= e.GetPosition(this).Y - 10)
                 {
@@ -145,6 +148,7 @@ namespace Glasses
 
         }
 
+        // ImageSource Eigenschaft für Hintergrundbild
         public string ImageSource
         {
             get { return ISource; }

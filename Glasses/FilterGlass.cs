@@ -27,7 +27,7 @@ namespace Glasses
         internal static FilterGlass main;
         //private double[,] Mask = new double[3, 3];
 
-        //access array through indexer /*https://www.daniweb.com/programming/software-development/threads/301123/accessors-for-an-multidemensional-array */
+        
 
         public double[,] Mask
         {
@@ -44,8 +44,26 @@ namespace Glasses
 
         public override void Paint(PaintingLib.BitmapEditor painting)
         {
-
             painting.Lock();
+
+            if (fi == null)
+            {
+                this.Mask = new double[,] { { -1, 0, -1 }, { 0, 5, 0 }, { -1, 0, -1 } };
+                FilterPropsDialog.intOld = 0;
+            }
+            else
+            {
+                if (fi.Filter_Name == "Kontrast")
+                {
+                    this.Mask = new double[,] { { -1, 0, -1 }, { 0, 5, 0 }, { -1, 0, -1 } };
+                }
+                else if (fi.Filter_Name == "Kanten")
+                {
+                    this.Mask = new double[,] { { -1, -1, -1 }, { -1, 8, -1 }, { -1, -1, -1 } };
+                }
+
+            }
+            
             Size size = CalcActualSize();
             Point childPos = this.TranslatePoint(new Point(), Parent as PaintingLib.CanvasBase);
             int ox = (int)childPos.X, oy = (int)childPos.Y;

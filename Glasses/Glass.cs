@@ -15,13 +15,13 @@ namespace Glasses
 
     public class Glass : PaintingLib.PainterBase
     {
-      //  EventHandler Click;
+     
         Color BorderColor = Color.FromRgb(0,0,0);
         double BorderWidth = 5;
         int ispressed = 0;
         int isscaling = 0;
  
-
+        // Standard Settings eines Glasses
         public Glass()
         {
             this.Width = 60;
@@ -33,26 +33,28 @@ namespace Glasses
             this.IsPressed = 0;
         }
 
-
+        // Eigenschaft um Rahmenfarbe zu bestimmen
         public Color FocusBorderColor
         {
             get { return (Color)BorderColor; }
             set { BorderColor = value; }
         }
 
+        // Eigenschaft um Rahmenbreite zu bestimmen
         public int FocusBorderWidth
         {
             get { return (int)BorderWidth; }
             set { BorderWidth = value; }
         }
 
-
+        // Ist ein Glass gedrückt ?
         public int IsPressed
         {
             get { return ispressed; }
             set { ispressed = value; }
         }
 
+        // Wird ein Glas skaliert
         public int IsScaling
         {
             get { return isscaling; }
@@ -61,7 +63,7 @@ namespace Glasses
 
       
 
-
+        // Funktion um Rahmen zu zeichnen
         public void PaintBorder()
         {
             this.BorderBrush = new SolidColorBrush(BorderColor);
@@ -69,11 +71,14 @@ namespace Glasses
             this.InvalidateVisual();
         }
 
+
+        
         public void Removing()
         {
             Std_KMP_Glasses.main.canvasCanvas.Children.Remove(this);
         }
 
+        // Funktion mit Initialisierung des Kontextmenüs für jedes Glas
         public void showContextmenu()
         {
             this.ContextMenu = new System.Windows.Controls.ContextMenu();
@@ -96,25 +101,28 @@ namespace Glasses
             this.ContextMenu.Items.Add(menuItem1);
         }
 
-
+        // Funktion um Z-Index eines Glases zu ändern (In den Hintergrund)
         private void Change_ZindexMinus(object sender, EventArgs e)
         {
             int ind = Canvas.GetZIndex(this);
             Canvas.SetZIndex(this, ind - 1 );
         }
 
+
+        // Funktion um Z-Index eines Glases zu ändern (In den Vordergrund)
         private void Change_ZindexPlus(object sender, EventArgs e)
         {
             int ind = Canvas.GetZIndex(this);
             Canvas.SetZIndex(this, ind + 1);
         }
 
-
+        // Virtuelle Methode, welche später in den jeweiligen Klassen der Gläser überschrieben wird
         public virtual void ShowPropsDialog(object sender, EventArgs e)
         {
             
         }
 
+        // Funktion um ein Glass aus Canvas zu entfernen
         private void Props_Remove(object sender, EventArgs e)
         {
             Std_KMP_Glasses.main.canvasCanvas.Children.Remove(this);
