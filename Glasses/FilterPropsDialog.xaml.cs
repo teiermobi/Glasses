@@ -18,14 +18,14 @@ namespace Glasses
     /// <summary>
     /// Interaktionslogik für FilterPropsDialog.xaml
     /// </summary>
-    public partial class FilterPropsDialog : Window
+    public partial class FilterPropsDialog :  Window
     {
         public FilterPropsDialog()
         {
             InitializeComponent();
             main = this;
-            comboBoxFilter.SelectedIndex = 0;
             OffsetDisp.Text = "3";
+            this.comboBoxFilter.SelectedIndex = intOld; // Zuvor abgespeicherten Filter Index aufrufen
 
 
 
@@ -56,7 +56,7 @@ namespace Glasses
             //myGrid.RowDefinitions.Add(rowDef3);
             //groupBox.Content = myGrid;
 
-                for (int i = 0; i < FilterGlass.main.Mask.GetLength(0); i++ )
+            for (int i = 0; i < FilterGlass.main.Mask.GetLength(0); i++ )
                 {
                     for (int j = 0; j < FilterGlass.main.Mask.GetLength(1); j++ )
                     {
@@ -84,6 +84,8 @@ namespace Glasses
 
 
         internal static FilterPropsDialog main;
+        private double[,] mask;
+        public string FilterName;
 
         public class TextBox
         {
@@ -111,13 +113,10 @@ namespace Glasses
             get
             {
                 List<string> filterSource = new List<string>();
-                
-                filterSource.Add("Kanten");
                 filterSource.Add("Kontrast");
+                filterSource.Add("Kanten");
                 filterSource.Add("Benutzerdef.");
                 //fontNamesSource = Fonts.SystemFontFamilies.Select(ff => ff.Source).ToList();
-                
-
                 return filterSource;
             }
             set
@@ -146,19 +145,50 @@ namespace Glasses
             //}
         }
 
+
+
+
+        public double[,] maskFilter
+        {
+            get { return mask; }
+            set { mask = value; }
+        }
+
+
+
+        //Filtername Index Wert speichern 
+        public static int intOld;
+
+        //Filtername für FilterGlass.cs zur verfügen stellen
+        public string Filter_Name
+        {
+            get { return FilterName; }
+            set
+            { FilterName = value;
+              InvalidateVisual();
+            }
+        }
+        
+
+
         private void comboBoxFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //if (comboBoxFilter.SelectedItem.ToString() == "Kanten")
-            //{
-            //    //FilterGlass kante new FilterGlass();
-            //    //Console.Write("Hier");
-            //}
+            if (comboBoxFilter.SelectedItem.ToString() == "Kontrast")
+            {
+               FilterName = "Kontrast";
+               intOld = comboBoxFilter.SelectedIndex;   //Filter Index übergeben
+            }
 
-            //else if(comboBoxFilter.SelectedItem.ToString() == "Kontrast")
-            //{
+            else if(comboBoxFilter.SelectedItem.ToString() == "Kanten")
+            {
+                FilterName = "Kanten";
+                intOld = comboBoxFilter.SelectedIndex;  //Filter Index übergeben
+            }
 
-            //}
-
+            Std_KMP_Glasses.main.canvasCanvas.InvalidateVisual();
         }
+
+
+        
     }
 }
