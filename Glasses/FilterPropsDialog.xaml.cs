@@ -133,14 +133,28 @@ namespace Glasses
 
 
 
-        public double Textbox
-        {
-            get { return Convert.ToDouble(textBox1.Text); }
-            set { textBox1.Text = value.ToString(); }
-        }
+        //public double Textbox
+        //{
+        //    get { return Convert.ToDouble(textBox1.Text); }
+        //    set { textBox1.Text = value.ToString(); }
+        //}
 
 
+        //public void GenerateMatrix(int N)
+        //{
+        //    rasterGrid.Children.Clear();
+        //    for (int row = N; row >= 0; row--)
+        //    {
+        //        TextBox txtb = new TextBox();
+        //        txtb
+        //        rasterGrid.Children.Add(txtb);
 
+        //        for (int column = N; column >= 0; column--)
+        //        {
+                    
+        //        }
+        //    }
+        //}
 
 
         public void GetMask()
@@ -180,14 +194,7 @@ namespace Glasses
 
         private void OffsetDisp_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //OffsetDisp.Text = "3";
             
-            //if(e.New)
-
-            //{
-            //    Offset.Value = offset;
-
-            //}
         }
 
         
@@ -199,12 +206,15 @@ namespace Glasses
                 int old = int.Parse(OffsetDisp.Text);
                 old -= 1;
                 OffsetDisp.Text = old.ToString();
+                //GenerateMatrix(old);
+
             }
             else
             {
-                int neu = int.Parse(OffsetDisp.Text);
-                neu += 1;
-                OffsetDisp.Text = neu.ToString();
+                int New = int.Parse(OffsetDisp.Text);
+                New += 1;
+                OffsetDisp.Text = New.ToString();
+                //GenerateMatrix(New);
             }
         }
 
