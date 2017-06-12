@@ -20,23 +20,27 @@ namespace Glasses
          
         }
 
+        // Helligkeitswert Eigenschaft
         public double SGBrightness
         {
             get { return Brightness; }
             set { Brightness = value; }
         }
 
+        // Aufruf des Eigenschaftendialogs
         public override void ShowPropsDialog(object sender, EventArgs e)
         {
             bri = new HelligkeitPropsDialog();
             bri.ShowDialog();
         }
 
+
+        // Überschriebene Paint-Methode
         public override void Paint(PaintingLib.BitmapEditor painting)
         {
 
                painting.Lock();
-
+               // Check ob es einen "alten" Wert gibt
                if(bri == null)
                 {
                     this.SGBrightness = 2;
@@ -48,7 +52,7 @@ namespace Glasses
                 }
 
                 
-
+                
                 Size size = CalcActualSize();
                 Point childPos = this.TranslatePoint(new Point(), Parent as Canvas);
                 int ox = (int)childPos.X, oy = (int)childPos.Y;
@@ -59,11 +63,12 @@ namespace Glasses
                     for (int j = (int)this.Height - 1; j >= 0; j--)
                     {
                         c = painting.GetPixel((ox + i), (oy + j));              
-                        double cR = c.R * Brightness;
-                        double cG = c.G * Brightness;
-                        double cB = c.B * Brightness;
+                        double cR = c.R * Brightness; // Rot-Kanal mit Heligkeit multiplizieren
+                        double cG = c.G * Brightness; // Grün-Kanal mit Heligkeit multiplizieren
+                        double cB = c.B * Brightness; // Blau-Kanal mit Heligkeit multiplizieren
                         double cA = 50;
 
+                        // Farbwerte sollen sich für die jeweiligen Kanäle nur zwischen 0 und 255 bewegen
                         if (cR < 0) cR = 1;
                         if (cR > 255) cR = 255;
 
@@ -73,8 +78,8 @@ namespace Glasses
                         if (cB < 0) cB = 1;
                         if (cB > 255) cB = 255;
 
-
-                    painting.SetPixel(ox + i, oy + j, Color.FromArgb((byte)cA, (byte)cR, (byte)cG, (byte)cB));
+                        // Pixel neu einfärben 
+                        painting.SetPixel(ox + i, oy + j, Color.FromArgb((byte)cA, (byte)cR, (byte)cG, (byte)cB));
 
                 }
            
