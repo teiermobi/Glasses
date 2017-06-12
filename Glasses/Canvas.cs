@@ -51,7 +51,7 @@ namespace Glasses
                     glass.FocusBorderWidth = 5;
                     glass.PaintBorder();
                     glass.IsPressed = 1;
-                    glass.InvalidateVisual();
+                //    glass.InvalidateVisual();
 
                 // Wird am Rand des Glases gedrückt
                 } else if (glass.Margin.Left + glass.ActualWidth - 10 <= e.GetPosition(this).X + 10 && glass.Margin.Left + glass.ActualWidth + 10 >= e.GetPosition(this).X - 10 || glass.Margin.Top + glass.ActualHeight - 10 <= e.GetPosition(this).Y + 10 && glass.Margin.Top + glass.ActualHeight + 10 >= e.GetPosition(this).Y - 10)
@@ -82,7 +82,7 @@ namespace Glasses
 
                 // Glass skalieren
 
-                else if (glass.Margin.Left + glass.ActualWidth - 10 <= e.GetPosition(this).X + 10 && glass.Margin.Left + glass.ActualWidth + 10 >= e.GetPosition(this).X - 10 || glass.Margin.Top + glass.ActualHeight - 10 <= e.GetPosition(this).Y + 10 && glass.Margin.Top + glass.ActualHeight + 10 >= e.GetPosition(this).Y - 10)
+                else if (glass.Margin.Left + glass.ActualWidth - 20 <= e.GetPosition(this).X + 20 && glass.Margin.Left + glass.ActualWidth + 20 >= e.GetPosition(this).X - 20 || glass.Margin.Top + glass.ActualHeight - 20 <= e.GetPosition(this).Y + 20 && glass.Margin.Top + glass.ActualHeight + 20 >= e.GetPosition(this).Y - 20)
                 {
                     this.Cursor = Cursors.SizeNWSE;
                     if (glass.IsPressed == 0 && glass.IsScaling == 1)
@@ -94,17 +94,11 @@ namespace Glasses
                             glass.Height = e.GetPosition(this).Y - glass.Margin.Top;
                             glass.Width = e.GetPosition(this).X - glass.Margin.Left;
                         }
-                        else
-                        {
-
+                        else {
+                            
                         }
-                        glass.InvalidateVisual();
                     }
-                    else
-                    {
-
-
-                    }
+                    else { }
 
                 }
                 else
@@ -138,12 +132,9 @@ namespace Glasses
                     }
                     else
                     {
-                       
                         glass.FocusBorderWidth = 0;
                     }
                     glass.PaintBorder();
-                    glass.InvalidateVisual();
-
             }
 
         }
@@ -185,10 +176,5 @@ namespace Glasses
             painting.Render(dv);
 
         }
-
-
-
-
-
     }
 }
