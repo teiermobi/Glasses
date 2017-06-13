@@ -30,7 +30,7 @@ namespace Glasses
             timmy.Tick += Timmy_Tick;
             this.DistortionLimit = 80.0;
             this.Distortion = 0.0;
-            this.DistortionDelta = 0.0;
+            this.DistortionDelta = 2.0;
             this.WaveDensity = 0.1;
 
             if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this)) timmy.Start();

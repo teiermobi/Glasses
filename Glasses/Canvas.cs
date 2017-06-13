@@ -75,17 +75,17 @@ namespace Glasses
 
                 // Glass verschieben
 
-                if (e.OriginalSource == glass && e.LeftButton == MouseButtonState.Pressed && glass.IsPressed == 1)
+                if (e.LeftButton == MouseButtonState.Pressed && glass.IsPressed == 1)
                 {
                     glass.Margin = new Thickness(e.GetPosition(glass).X + glass.Margin.Left - MouseDownLocation.X, e.GetPosition(glass).Y + glass.Margin.Top - MouseDownLocation.Y, 0, 0);
                 }
 
                 // Glass skalieren
 
-                else if (glass.Margin.Left + glass.ActualWidth - 20 <= e.GetPosition(this).X + 20 && glass.Margin.Left + glass.ActualWidth + 20 >= e.GetPosition(this).X - 20 || glass.Margin.Top + glass.ActualHeight - 20 <= e.GetPosition(this).Y + 20 && glass.Margin.Top + glass.ActualHeight + 20 >= e.GetPosition(this).Y - 20)
+                else if (glass.Margin.Left + glass.ActualWidth - 5 <= e.GetPosition(this).X + 5 && glass.Margin.Left + glass.ActualWidth + 5 >= e.GetPosition(this).X - 5 || glass.Margin.Top + glass.ActualHeight - 5 <= e.GetPosition(this).Y + 5 && glass.Margin.Top + glass.ActualHeight + 5 >= e.GetPosition(this).Y - 5)
                 {
                     this.Cursor = Cursors.SizeNWSE;
-                    if (glass.IsPressed == 0 && glass.IsScaling == 1)
+                    if (glass.IsScaling == 1)
                     {
                         glass.PaintBorder();
 
@@ -94,8 +94,9 @@ namespace Glasses
                             glass.Height = e.GetPosition(this).Y - glass.Margin.Top;
                             glass.Width = e.GetPosition(this).X - glass.Margin.Left;
                         }
-                        else {
-                            
+                        else
+                        {
+
                         }
                     }
                     else { }
@@ -108,6 +109,16 @@ namespace Glasses
 
             }
         }
+
+  
+
+
+
+
+
+
+
+        
 
 
         // Linke Maustaste losgelassen
