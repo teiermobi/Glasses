@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Glasses" 
         mc:Ignorable="d"
         SizeChanged="WindoW_SizeChanged"
-        Title="Glass" Height="466.106" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="520" MinWidth="520" MinHeight="466.106" WindowStartupLocation="CenterScreen">
+        Title="Glass" Height="466.106" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="520" MinWidth="520" MinHeight="466.106" WindowStartupLocation="CenterScreen" Icon="Sonya-Swarm-Nerd-Glasses.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="337*"/>
