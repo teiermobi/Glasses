@@ -195,6 +195,66 @@ namespace Glasses
 
         }
 
+        private void Button_Click_Demo2(object sender, RoutedEventArgs e)
+        {
+            canvasCanvas.Children.Clear();
+
+            wa = new WaterGlass();
+            wa.Name = "Wasser" + index++;
+            wa.FocusBorderColor = Color.FromRgb(0, 220, 0);
+            wa.FocusBorderWidth = 2;
+            wa.PaintBorder();
+            wa.Margin = new Thickness(80, 20, 0, 0);
+            wa.Width = 200;
+            wa.Height = 180;
+            canvasCanvas.Children.Add(wa);
+            wa.showContextmenu();
+            wa.InvalidateVisual();
+
+            he = new BrightnessGlass();
+            he.Name = "Helligkeit" + index++;
+            he.FocusBorderColor = Color.FromRgb(0, 220, 0);
+            he.FocusBorderWidth = 2;
+            he.PaintBorder();
+            he.Margin = new Thickness(190, 120, 0, 0);
+            he.Width = 90;
+            he.Height = 70;
+            canvasCanvas.Children.Add(he);
+            he.showContextmenu();
+            he.InvalidateVisual();
+        }
+
+
+        private void Button_Click_Demo3(object sender, RoutedEventArgs e)
+        {
+            canvasCanvas.Children.Clear();
+
+            wa = new WaterGlass();
+            wa.Name = "Wasser" + index++;
+            wa.FocusBorderColor = Color.FromRgb(0, 220, 220);
+            wa.FocusBorderWidth = 2;
+            wa.PaintBorder();
+            wa.Margin = new Thickness(80, 20, 0, 0);
+            wa.Width = 200;
+            wa.Height = 180;
+            canvasCanvas.Children.Add(wa);
+            wa.showContextmenu();
+            wa.InvalidateVisual();
+
+
+            fi = new FilterGlass();
+            fi.Name = "Filter" + index++;
+            fi.FocusBorderColor = Color.FromRgb(0, 220, 220);
+            fi.FocusBorderWidth = 2;
+            fi.PaintBorder();
+            fi.Margin = new Thickness(300, 20, 0, 0);
+            fi.Width = 200;
+            fi.Height = 120;
+            canvasCanvas.Children.Add(fi);
+            fi.showContextmenu();
+            fi.InvalidateVisual();
+        }
+
 
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -210,6 +270,8 @@ namespace Glasses
             }
 
         }
+
+        
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {

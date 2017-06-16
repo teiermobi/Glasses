@@ -182,7 +182,7 @@ namespace Glasses
             IMG.Source = new BitmapImage(new Uri(bild));
 
 
-            dc.DrawImage(IMG.Source, new Rect(0, 0, Std_KMP_Glasses.main.canvasCanvas.MinWidth, Std_KMP_Glasses.main.canvasCanvas.MinHeight));
+            dc.DrawImage(IMG.Source, new Rect(0, 0, Std_KMP_Glasses.main.canvasCanvas.ActualWidth, Std_KMP_Glasses.main.canvasCanvas.ActualHeight));
             dc.Close();
             painting.Render(dv);
 

@@ -18,10 +18,8 @@
         <Button x:Name="btnImageLoad" Content="Laden" HorizontalAlignment="Right" Margin="0,14,5,0" VerticalAlignment="Top" Width="43" Height="23" HorizontalContentAlignment="Center" Click="btnImageLoad_Click"/>
 
 
-        <Grid x:Name="canvasGrid" Margin="5,47,5,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-            <local:Canvas x:Name="canvasCanvas" Background="Black">
-
-            </local:Canvas>
+        <Grid x:Name="canvasGrid" Margin="5,47,5.333,90.667" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2" >
+            <local:Canvas x:Name="canvasCanvas" Background="Black"/>
         </Grid>
 
 
@@ -40,8 +38,8 @@
                 VerticalAlignment="Bottom"
                 Width="195">
                 <Button Content="Demo 1" HorizontalAlignment="Right" Margin="0,0,128,5" VerticalAlignment="Bottom" Width="50" Click="Button_Click_Demo1"/>
-                <Button Content="Demo 2" HorizontalAlignment="Right" Margin="0,0,18,5" VerticalAlignment="Bottom" Width="50"/>
-                <Button Content="Demo 3" HorizontalAlignment="Right" Margin="0,0,73,5" VerticalAlignment="Bottom" Width="50"/>
+                <Button Content="Demo 3" HorizontalAlignment="Right" Margin="0,0,18,5" VerticalAlignment="Bottom" Width="50" IsCancel="True" Click="Button_Click_Demo3"/>
+                <Button Content="Demo 2" HorizontalAlignment="Right" Margin="0,0,73,5" VerticalAlignment="Bottom" Width="50" Click="Button_Click_Demo2"/>
 
             </Grid>
 
