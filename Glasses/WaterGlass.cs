@@ -14,7 +14,13 @@ namespace Glasses
 
     public class WaterGlass : Glass
     {
+        WaterPropsDialog wa;
 
+        public override void ShowPropsDialog(object sender, EventArgs e)
+        {
+            wa = new WaterPropsDialog();
+            wa.ShowDialog();
+        }
 
         internal static DispatcherTimer timmy = new DispatcherTimer();
 
