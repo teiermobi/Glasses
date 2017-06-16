@@ -69,7 +69,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="HelligkeitPropsDialog.xaml">
+    <Page Include="BrightnessPropsDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -88,8 +88,8 @@
     <Compile Include="FilterPropsDialog.xaml.cs">
       <DependentUpon>FilterPropsDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HelligkeitPropsDialog.xaml.cs">
-      <DependentUpon>HelligkeitPropsDialog.xaml</DependentUpon>
+    <Compile Include="BrightnessPropsDialog.xaml.cs">
+      <DependentUpon>BrightnessPropsDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="WaterGlass.cs" />
     <Compile Include="Std_KMP_Glasses.xaml.cs">

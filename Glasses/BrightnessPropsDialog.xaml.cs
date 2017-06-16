@@ -15,19 +15,19 @@ using System.Windows.Shapes;
 namespace Glasses
 {
     /// <summary>
-    /// Interaktionslogik für HelligkeitPropsDialog.xaml
+    /// Interaktionslogik für BrightnessPropsDialog.xaml
     /// </summary>
-    public partial class HelligkeitPropsDialog : Window
+    public partial class BrightnessPropsDialog : Window
     {
        
-        public HelligkeitPropsDialog()
+        public BrightnessPropsDialog()
         {
             InitializeComponent();
             main = this;
             this.Brightness = (int)valueOld;
         }
 
-        internal static Glasses.HelligkeitPropsDialog main;
+        internal static Glasses.BrightnessPropsDialog main;
 
         public int Brightness
         {

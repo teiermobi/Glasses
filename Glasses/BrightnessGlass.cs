@@ -12,7 +12,7 @@ namespace Glasses
 {
     public class BrightnessGlass : Glass
     {
-        HelligkeitPropsDialog bri;
+        BrightnessPropsDialog bri;
         double Brightness;
 
         public BrightnessGlass()
@@ -30,7 +30,7 @@ namespace Glasses
         // Aufruf des Eigenschaftendialogs
         public override void ShowPropsDialog(object sender, EventArgs e)
         {
-            bri = new HelligkeitPropsDialog();
+            bri = new BrightnessPropsDialog();
             bri.ShowDialog();
         }
 
@@ -44,7 +44,7 @@ namespace Glasses
                if(bri == null)
                 {
                     this.SGBrightness = 2;
-                    HelligkeitPropsDialog.valueOld = 2;
+                BrightnessPropsDialog.valueOld = 2;
 
                 } else
                 {
