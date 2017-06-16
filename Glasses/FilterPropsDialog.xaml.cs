@@ -19,7 +19,7 @@ namespace Glasses
             comboBoxFilter.SelectedIndex = intOld;  //gespeicherten ComboBox Item Index ausgeben
 
             this.OffsetDisp.Text = MaskLength.ToString();
-            GenerateMatrix(MaskLength);
+            GenerateMatrix(5);
         }
 
         public class ComboboxItem
@@ -67,7 +67,7 @@ namespace Glasses
                         tb.Margin = new Thickness(5, 5, 5, 5);
                         tb.HorizontalContentAlignment = HorizontalAlignment.Center;
                         tb.VerticalContentAlignment = VerticalAlignment.Center;
-                        // tb.Name = i+"_"+j;
+                        tb.Name = ("box"+i+j);
                         rasterGrid.Children.Add(tb);
                     }
                 }
