@@ -52,8 +52,8 @@ namespace Glasses
         private void WindoW_SizeChanged(object sender, SizeChangedEventArgs e)
         {
  
-            canvasCanvas.MinWidth = main.ActualWidth;
-            canvasCanvas.MinHeight = main.ActualHeight -150;
+            canvasCanvas.MinWidth = canvasGrid.ActualWidth;
+            canvasCanvas.MinHeight = canvasGrid.ActualHeight;
             if (WindowState == WindowState.Maximized)
             {
               // ToDo
