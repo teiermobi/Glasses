@@ -16,6 +16,8 @@ namespace Glasses
     {
         WaterPropsDialog wa;
 
+        // Aufruf des Eigenschaftendialog
+
         public override void ShowPropsDialog(object sender, EventArgs e)
         {
             wa = new WaterPropsDialog();
@@ -26,10 +28,12 @@ namespace Glasses
 
         double s, dd, d, dl;
         public enum WaterGlassType { Strudel, Welle };
-        WaterGlassType type = WaterGlassType.Strudel;
+        WaterGlassType type = WaterGlassType.Strudel; // Strudel Standardmäßig ausgewählt
         int iorg, jorg;
         Color c;
 
+
+        // Initialisierung und setzen der Standardwerte 
         public WaterGlass()
         {
             timmy.Interval = new TimeSpan(0, 0, 0, 0, 40); //25 mal pro Sekunde
@@ -43,19 +47,22 @@ namespace Glasses
         }
 
 
-
+        // Eigenschaft Watertyp um die Wasserarten zu unterscheiden (siehe Angabe)
         public WaterGlassType WaterType
         {
             get { return type; }
             set { type = value; }
         }
 
+
+        // Eigenschaft DistortionLimit (siehe Angabe)
         public double DistortionLimit
         {
             get { return dl; }
             set { dl = value; }
         }
 
+        // Eigenschaft Distortion (Wert darf nur zwischen positivem und negativem DistortionLimit liegen) (siehe ANgabe)
         public double Distortion
         {
             get { return (double)s; }
@@ -73,12 +80,14 @@ namespace Glasses
             }
         }
 
+        // Eigenschaft DistortionDelta (siehe Angabe)
         public double DistortionDelta
         {
             get { return (double)dd; }
             set { dd = value; }
         }
 
+        // Eigenschaft WaveDensity (siehe Angabe)
         public double WaveDensity
         {
             get { return (double)d; }
@@ -86,7 +95,7 @@ namespace Glasses
         }
 
 
-
+        // Timer der den Distortion Wert zwischen den Grenzen hält
         private void Timmy_Tick(object sender, EventArgs e)
         {
             if (Distortion == DistortionLimit || Distortion == -DistortionLimit)
@@ -101,7 +110,7 @@ namespace Glasses
             InvalidateVisual();
         }
 
-
+        // Paint Methode zum Zeichnen des Glases
         public override void Paint(PaintingLib.BitmapEditor painting)
         {
 
