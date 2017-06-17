@@ -56,7 +56,7 @@
                     HorizontalAlignment="Left"
                     Margin="12,10,0,5"
                     VerticalAlignment="Bottom"
-                    Width="60" Click="btnHelligkeit_Click" MouseRightButtonDown="btnHelligkeit_MouseRightButtonDown"
+                    Width="60" Click="btnHelligkeit_Click"
                      />
                 <Button
                     x:Name="btnFilter"
@@ -64,7 +64,7 @@
                     HorizontalAlignment="Left"
                     Margin="77,10,0,5"
                     VerticalAlignment="Bottom"
-                    Width="60" Click="btnFilter_Click" MouseRightButtonDown="btnFilter_MouseRightButtonDown"
+                    Width="60" Click="btnFilter_Click"
                     />
                 <Button
                     x:Name="btnWasser"
@@ -72,7 +72,7 @@
                     HorizontalAlignment="Left"
                     Margin="142,10,0,5"
                     VerticalAlignment="Bottom"
-                    Width="60" Click="btnWasser_Click" MouseRightButtonDown="btnWasser_MouseRightButtonDown"
+                    Width="60" Click="btnWasser_Click"
                      />
 
             </Grid>

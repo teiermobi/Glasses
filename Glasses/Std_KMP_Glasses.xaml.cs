@@ -47,11 +47,13 @@ namespace Glasses
            //canvasCanvas. ..
         }
 
+
+        // Wenn das Fenster vergrößert wird, auch das Canvas mit Bild anpassen
         private void WindoW_SizeChanged(object sender, SizeChangedEventArgs e)
         {
  
-            canvasCanvas.MinWidth = main.Width;
-            canvasCanvas.MinHeight = main.Height -150;
+            canvasCanvas.MinWidth = main.ActualWidth;
+            canvasCanvas.MinHeight = main.ActualHeight -150;
             if (WindowState == WindowState.Maximized)
             {
               // ToDo
@@ -60,16 +62,16 @@ namespace Glasses
 
         }
 
-   
 
 
+        // Button um manuel das Bild zu laden
         private void btnImageLoad_Click(object sender, RoutedEventArgs e)
         {
             canvasCanvas.InvalidateVisual();
        
         }
 
-
+        // Filedialog zur Auswahl eines neuen Bildes laden
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog of = new OpenFileDialog();
@@ -79,6 +81,9 @@ namespace Glasses
             if (of.ShowDialog() == true)
             {
                 textboxSrc.Text = of.FileName;
+                canvasCanvas.ImageSource = of.FileName;
+
+                canvasCanvas.InvalidateVisual();
             }
            
         }
@@ -87,6 +92,8 @@ namespace Glasses
         Glass he, fi, wa;
         private int index = 1;
 
+
+        // Hellgiekitsglas erstellen (vorher Check ob die Checkbox gechecked ist)
         private void btnHelligkeit_Click(object sender, RoutedEventArgs e)
         {
 
@@ -106,14 +113,7 @@ namespace Glasses
 
         }
 
-        private void btnHelligkeit_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            canvasCanvas.Children.Remove(he);
-        }
-
-
-
-
+        // Filterglas erstellen (vorher Check ob die Checkbox gechecked ist)
         private void btnFilter_Click(object sender, RoutedEventArgs e)
         {
             fi = new FilterGlass();
@@ -131,12 +131,8 @@ namespace Glasses
             fi.showContextmenu();
             fi.InvalidateVisual();
         }
-        private void btnFilter_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            canvasCanvas.Children.Remove(fi);
-        }
 
-
+        // Waserglas erstellen (vorher Check ob die Checkbox gechecked ist)
         private void btnWasser_Click(object sender, RoutedEventArgs e)
         {
             wa = new WaterGlass();
@@ -156,13 +152,10 @@ namespace Glasses
             WaterGlass.timmy.Start();
         }
 
-        private void btnWasser_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            canvasCanvas.Children.Remove(wa);
-            WaterGlass.timmy.Stop();
-        }
 
         
+
+        // Demo 1 Gläser (Filter + Helligkeit mit blauen Rändern)
 
         private void Button_Click_Demo1(object sender, RoutedEventArgs e)
         {
@@ -195,6 +188,8 @@ namespace Glasses
 
         }
 
+
+        // Demo 2 Gläser (Wasser + Helligkeit mit grünen Rändern)
         private void Button_Click_Demo2(object sender, RoutedEventArgs e)
         {
             canvasCanvas.Children.Clear();
@@ -225,6 +220,7 @@ namespace Glasses
         }
 
 
+        // Demo 3 Gläser (Filter + Wasser mit grün-blauem Rändern)
         private void Button_Click_Demo3(object sender, RoutedEventArgs e)
         {
             canvasCanvas.Children.Clear();
@@ -256,7 +252,7 @@ namespace Glasses
         }
 
 
-
+        // Checkbox um Ränder der Gläser zu aktivieren
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             IEnumerable<Glass> Glasses = canvasCanvas.Children.OfType<Glass>();
@@ -271,8 +267,8 @@ namespace Glasses
 
         }
 
-        
 
+        // Checkbox um Ränder der Gläser zu deaktivieren
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
 
@@ -287,10 +283,6 @@ namespace Glasses
 
         }
 
-
-
-
-       
 
         private void FilterProps_Click(object sender, RoutedEventArgs e)
         {

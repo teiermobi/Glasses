@@ -110,16 +110,6 @@ namespace Glasses
             }
         }
 
-  
-
-
-
-
-
-
-
-        
-
 
         // Linke Maustaste losgelassen
 
