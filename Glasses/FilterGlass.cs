@@ -91,15 +91,18 @@ namespace Glasses
                             red += imageColor.R * Mask[filterX, filterY];
                             green += imageColor.G * Mask[filterX, filterY];
                             blue += imageColor.B * Mask[filterX, filterY];
+                           
                         }
 
-                        int r = Math.Min(Math.Max((int)(red), 0), 255);
-                        int g = Math.Min(Math.Max((int)(green), 0), 255);
-                        int b = Math.Min(Math.Max((int)(blue), 0), 255);
+                       
 
-                        result[i, j] = Color.FromRgb((byte)r, (byte)g, (byte)b);
+                       
                     }
-
+                    int r = Math.Min(Math.Max((int)(red), 0), 255);
+                    int g = Math.Min(Math.Max((int)(green), 0), 255);
+                    int b = Math.Min(Math.Max((int)(blue), 0), 255);
+                    result[i, j] = Color.FromRgb((byte)r, (byte)g, (byte)b);
+                 
                 }
                
             }
@@ -107,7 +110,7 @@ namespace Glasses
             {
                 for (int l = 0; l < (int)this.Height; ++l)
                 {
-                    painting.SetPixel(ox + k, oy + l, result[k, l]);
+                  painting.SetPixel(ox + k, oy + l, result[k, l]);
                 }
             }
             painting.Unlock();
