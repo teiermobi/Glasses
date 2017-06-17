@@ -17,7 +17,7 @@ namespace Glasses
         double[,] mask;
 
 
-
+        // Initialisierung, Setzen der StandardMaske
         public FilterGlass()
         {
             main = this;
@@ -28,14 +28,14 @@ namespace Glasses
         //private double[,] Mask = new double[3, 3];
 
         
-
+        // Masken Eigenschaft
         public double[,] Mask
         {
             get { return  mask; }
             set { mask = value; }
         }
 
-
+        // Eigenschaftendialog aufrufen
         public override void ShowPropsDialog(object sender, EventArgs e)
         {
             fi = new FilterPropsDialog();
@@ -43,6 +43,8 @@ namespace Glasses
             fi.ShowDialog();
         }
 
+
+        // Paint Methode zum Zeichnen des Glases
         public override void Paint(PaintingLib.BitmapEditor painting)
         {
             painting.Lock();
