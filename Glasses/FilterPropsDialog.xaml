@@ -11,18 +11,17 @@
 
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="5">
             <Label x:Name="filter_label" Content="_Filter: " HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <ComboBox x:Name="comboBoxFilter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="87" ItemsSource="{Binding FilterSource}"  SelectionChanged="comboBoxFilter_SelectionChanged" />
+            <ComboBox x:Name="comboBoxFilter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" ItemsSource="{Binding FilterSource}"  SelectionChanged="comboBoxFilter_SelectionChanged" />
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="5">
             <Label x:Name="groesse_label" Content="_Größe:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.467,1.077" Height="26" Width="45"/>
             <TextBox x:Name="OffsetDisp" Text="3"  TextChanged="OffsetDisp_TextChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="37" />
             <ScrollBar x:Name="Offset"  SmallChange="1" Maximum="5" Value="3" Minimum="1" ValueChanged="Offset_ValueChanged" Width="17"  />
-            <!--<local:BrightnessGlass HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:LayoutOverrides="Width, Height"/>-->
         </StackPanel>
 
         <GroupBox x:Name="groupBox" Header="Maske" DockPanel.Dock="Top" Margin="5">
-            <UniformGrid x:Name="rasterGrid" Margin="5" Columns="3" Rows="3">
+            <UniformGrid x:Name="rasterGrid" Margin="5" >
                 <TextBox x:Name="textBox1" Margin="5" TextWrapping="NoWrap"  TextAlignment="Center"/>
                 <TextBox x:Name="textBox2" Margin="5" TextWrapping="NoWrap" TextAlignment="Center"/>
                 <TextBox x:Name="textBox3" Margin="5" TextWrapping="NoWrap"  TextAlignment="Center"/>
@@ -32,6 +31,13 @@
                 <TextBox x:Name="textBox7" Margin="5" TextWrapping="NoWrap"  TextAlignment="Center"/>
                 <TextBox x:Name="textBox8" Margin="5" TextWrapping="NoWrap" TextAlignment="Center"/>
                 <TextBox x:Name="textBox9" Margin="5" TextWrapping="NoWrap"  TextAlignment="Center"/>
+                <TextBox x:Name="textBox10" Margin="5" TextWrapping="NoWrap"  TextAlignment="Center"/>
+                <TextBox x:Name="textBox11" Margin="5" TextWrapping="NoWrap"  TextAlignment="Center"/>
+                <TextBox x:Name="textBox12" Margin="5" TextWrapping="NoWrap"  TextAlignment="Center"/>
+                <TextBox x:Name="textBox13" Margin="5" TextWrapping="NoWrap"  TextAlignment="Center"/>
+                <TextBox x:Name="textBox14" Margin="5" TextWrapping="NoWrap"  TextAlignment="Center"/>
+                <TextBox x:Name="textBox15" Margin="5" TextWrapping="NoWrap"  TextAlignment="Center"/>
+                <TextBox x:Name="textBox16" Margin="5" TextWrapping="NoWrap"  TextAlignment="Center"/> 
             </UniformGrid>
 
 

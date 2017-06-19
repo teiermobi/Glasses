@@ -284,11 +284,6 @@ namespace Glasses
         }
 
 
-        private void FilterProps_Click(object sender, RoutedEventArgs e)
-        {
-            FilterPropsDialog fil = new FilterPropsDialog();
-            fil.ShowDialog();
-        }
 
 
     }
