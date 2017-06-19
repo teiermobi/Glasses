@@ -98,7 +98,7 @@ namespace Glasses
             {
                 filterName = "Kontrast";
                 intOld = comboBoxFilter.SelectedIndex;
-                GenerateMatrix(MaskLength);
+                //GenerateMatrix(MaskLength);
                 Std_KMP_Glasses.main.canvasCanvas.InvalidateVisual();
                 InvalidateVisual();
             }
@@ -107,11 +107,11 @@ namespace Glasses
             {
                 filterName = "Kanten";
                 intOld = comboBoxFilter.SelectedIndex;
-                GenerateMatrix(MaskLength);
+                //GenerateMatrix(MaskLength);
                 Std_KMP_Glasses.main.canvasCanvas.InvalidateVisual();
                 InvalidateVisual();
             }
-
+            GenerateMatrix(MaskLength);
         }
 
         private void OffsetDisp_TextChanged(object sender, TextChangedEventArgs e)
