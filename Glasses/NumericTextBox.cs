@@ -15,6 +15,7 @@ namespace Glasses
         public NumericTextBox()
         {
             CommandManager.AddPreviewExecutedHandler(this, CommandManager_PreviewExecuted);
+          //  this.onChange += new RoutedEventHandler(GetTextfromTextboxes);
         }
 
         protected override void OnPreviewTextInput(TextCompositionEventArgs e)
@@ -28,9 +29,34 @@ namespace Glasses
             if (e.Command == ApplicationCommands.Paste) e.Handled = true;
         }
 
+        //public void GetMaskfromTextbox()
+        //{
+        //    IEnumerable<TextBox> TextBoxes = FilterPropsDialog.main.rasterGrid.Children.OfType<TextBox>();
+           
+                    
+        //    double value;
+        //    foreach (var textbox in TextBoxes)
+        //    {
+        //        for (int x = 0; x < 5; x++)
+        //        {
+        //            for (int y = 0; y < 5; y++)
+        //            {
+        //                FilterGlass.main.Mask = new double[x, y];
+        //                value = Convert.ToDouble(textbox.Text);
+        //                FilterGlass.main.Mask[x, y] = value;
+        //            }
+        //        }
+
+        //    }
+  
+
+        //}
+
         protected override void OnTextChanged(TextChangedEventArgs e)
         {
+           
             base.OnTextChanged(e);
+ 
 
             int val = 0;
             if (!int.TryParse(Text, out val)) val = 0;
