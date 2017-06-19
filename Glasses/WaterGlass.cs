@@ -40,11 +40,11 @@ namespace Glasses
         {
             timmy.Interval = new TimeSpan(0, 0, 0, 0, 40); //25 mal pro Sekunde
             timmy.Tick += Timmy_Tick;
-            this.DistortionLimit = 80.1;
+            this.DistortionLimit = 80.0;
             this.Distortion = 0.0;
-            this.DistortionDelta = 2.0;
+            this.DistortionDelta = 1.0;
             this.WaveDensity = 0.1;
-            SwirlSpeed = 0.1;
+            SwirlSpeed = 1.0;
 
             if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this)) timmy.Start();
         }
@@ -210,7 +210,7 @@ namespace Glasses
                         {
                             double l = Math.Sqrt(i * i + j * j); //Abstand vom Mittelpunkt (einfach darstellbar durch internes Koord-syst.)
                             double angle_radians = Math.Atan2(j, i); //Winkel zum Mittelpunkt
-                            double angle_degrees = ((angle_radians * 180.0) / Math.PI) + Distortion * SwirlSpeed * l;
+                            double angle_degrees = ((angle_radians * 180.0) / Math.PI) + Distortion * 300 * SwirlSpeed / l;
                             angle_radians = (angle_degrees * Math.PI) / 180.0;
 
                             //Ursprünge der neuen Farben
