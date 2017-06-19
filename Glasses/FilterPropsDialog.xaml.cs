@@ -18,7 +18,6 @@ namespace Glasses
             InitializeComponent();
             comboBoxFilter.SelectedIndex = intOld;  //gespeicherten ComboBox Item Index ausgeben
             this.OffsetDisp.Text = MaskLength.ToString();
-            GenerateMatrix(5);
         }
 
 
@@ -55,7 +54,7 @@ namespace Glasses
         //public double MaskValue { get { return (int)FilterGlass.main.Mask.GetValue(0); } }
 
 
-        public void GenerateMatrix(int N)
+        public void GenerateMatrix()
         {
             if (rasterGrid != null)
             {
@@ -79,6 +78,8 @@ namespace Glasses
             }
         }
 
+       
+
         public void GenerateDefaultMatrix(int N)
         {
             if (rasterGrid != null)
@@ -89,7 +90,12 @@ namespace Glasses
                 {
                     for (int j = 0; j < N; j++)
                     {
-                        double value = 0;
+                        //double value = 0;
+                        double[,] oldMask = FilterGlass.main.Mask;
+                        FilterGlass.main.Mask = new double[N,N];
+                        FilterGlass.main.Mask = oldMask;
+                        
+                        double value = FilterGlass.main.Mask[i, j];
                         NumericTextBox ta = new NumericTextBox();
                         ta.Text = value.ToString();
                         ta.Margin = new Thickness(5, 5, 5, 5);
