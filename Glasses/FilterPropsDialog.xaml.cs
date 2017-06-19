@@ -84,9 +84,9 @@ namespace Glasses
             {
                 rasterGrid.Children.Clear();
                 
-                for (int i = 0; i <= N; i++)
+                for (int i = 0; i < N; i++)
                 {
-                    for (int j = 0; j <= N; j++)
+                    for (int j = 0; j < N; j++)
                     {
                         double value = 0;
                         TextBox tb = new TextBox();
@@ -98,8 +98,8 @@ namespace Glasses
                         rasterGrid.Children.Add(tb);
                     }
                 }
-                //rasterGrid.Columns = N;
-                //rasterGrid.Rows = N ;
+                rasterGrid.Columns = N;
+                rasterGrid.Rows = N ;
             }
         }
 
