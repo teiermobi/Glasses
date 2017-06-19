@@ -9,29 +9,29 @@
     <DockPanel>
         <DockPanel DockPanel.Dock="Top"  Margin="5" VerticalAlignment="Top" >
             <Label x:Name="label" Content="Typ: " HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"/>
-            <ComboBox x:Name="comboBox" Margin="5" VerticalAlignment="Center" ItemsSource="{Binding WaterSource}"/>
+            <ComboBox x:Name="waterGlassComboBox" Margin="5" VerticalAlignment="Center" SelectionChanged="waterGlassComboBox_SelectionChanged"/>
         </DockPanel>
         <DockPanel DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top" >
             <Label x:Name="Störungsgrenze" Content="Störungsgrenze:" Margin="5" VerticalAlignment="Center" Width="110"/>
-            <TextBox x:Name="textBox"  Text="80.0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="96" />
-            <ScrollBar x:Name="scrollBar"  SmallChange="0.1" Maximum="100" Value="80.0" Minimum="0" Width="17" HorizontalAlignment="Right"/>
+            <TextBox x:Name="distortionLimitTextBox" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="96" LostFocus="distortionLimitTextBox_LostFocus" KeyDown="distortionLimitTextBox_KeyDown" />
+            <ScrollBar x:Name="distortionLimitScrollBar" SmallChange="0.1" Maximum="100.0" Minimum="-100.0" Value="0.0" Width="17" HorizontalAlignment="Right" ValueChanged="distortionLimitScrollBar_ValueChanged"/>
         </DockPanel>
         <DockPanel DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top" >
             <Label x:Name="Störungsdelta" Content="Störungsdelta:" Margin="5" VerticalAlignment="Center" Width="110"/>
-            <TextBox x:Name="deltaBox"   Text="80.0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="96" />
-            <ScrollBar x:Name="deltascrollBar"  SmallChange="0.1" Maximum="100" Value="80.0" Minimum="0" Width="17" HorizontalAlignment="Right" />
+            <TextBox x:Name="distortionDeltaTextBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="96" LostFocus="distortionDeltaTextBox_LostFocus" KeyDown="distortionDeltaTextBox_KeyDown" />
+            <ScrollBar x:Name="deltascrollBar"  SmallChange="0.1" Maximum="100" Value="80.0" Minimum="0" Width="17" HorizontalAlignment="Right" ValueChanged="deltascrollBar_ValueChanged" />
             
             
         </DockPanel>
         <DockPanel DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top" >
             <Label x:Name="Störung" Content="Störung:" Margin="5" VerticalAlignment="Center" Width="110"/>
-            <TextBox x:Name="StörungdeltaBox"   Text="80.0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="97"/>
-            <ScrollBar x:Name="StörungdeltascrollBar"  SmallChange="0.1" Maximum="100" Value="80.0" Minimum="0" Width="17" HorizontalAlignment="Right"/>
+            <TextBox x:Name="distortionTextBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="97"/>
+            <ScrollBar x:Name="distortionScrollBar"  SmallChange="0.1" Maximum="100" Value="80.0" Minimum="0" Width="17" HorizontalAlignment="Right"/>
         </DockPanel>
         <DockPanel DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top" >
             <Label x:Name="Wellendichte" Content="Wellendichte:" Margin="5" VerticalAlignment="Center" Width="110"/>
-            <TextBox x:Name="WellendeltaBox"   Text="80.0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="96"/>
-            <ScrollBar x:Name="WellenscrollBar"  SmallChange="0.1" Maximum="100" Value="80.0" Minimum="0" Width="17" HorizontalAlignment="Right"/>
+            <TextBox x:Name="waveDensityTextBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="96"/>
+            <ScrollBar x:Name="waveDensityScrollBar"  SmallChange="0.1" Maximum="100" Value="80.0" Minimum="0" Width="17" HorizontalAlignment="Right"/>
         </DockPanel>
 
 

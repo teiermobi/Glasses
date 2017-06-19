@@ -11,6 +11,7 @@ using System.Windows.Input;
 
 namespace Glasses
 {
+    public enum WaterGlassType { Strudel, Welle };
 
     public class WaterGlass : Glass
     {
@@ -20,30 +21,52 @@ namespace Glasses
 
         public override void ShowPropsDialog(object sender, EventArgs e)
         {
-            wa = new WaterPropsDialog();
+            wa = new WaterPropsDialog( this );
             wa.ShowDialog();
         }
 
         internal static DispatcherTimer timmy = new DispatcherTimer();
 
         double s, dd, d, dl;
-        public enum WaterGlassType { Strudel, Welle };
-        WaterGlassType type = WaterGlassType.Welle; // Strudel Standardmäßig ausgewählt
-        int iorg, jorg;
+        
+        WaterGlassType type = WaterGlassType.Welle; 
+        int i_orig, j_orig;
         Color c;
 
-
+        private int dir = 1;
+        private double speed;
         // Initialisierung und setzen der Standardwerte 
         public WaterGlass()
         {
             timmy.Interval = new TimeSpan(0, 0, 0, 0, 40); //25 mal pro Sekunde
             timmy.Tick += Timmy_Tick;
-            this.DistortionLimit = 80.0;
+            this.DistortionLimit = 80.1;
             this.Distortion = 0.0;
-            this.DistortionDelta = 1.0;
+            this.DistortionDelta = 2.0;
             this.WaveDensity = 0.1;
+            SwirlSpeed = 0.1;
 
             if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this)) timmy.Start();
+        }
+
+        public double SwirlSpeed
+        {
+            get
+            {
+                return speed;
+            }
+
+            set
+            {
+                if ( value > 0.0 )
+                {
+                    speed = value;
+                }
+                else
+                {
+                    speed = -value;
+                }
+            }
         }
 
 
@@ -59,7 +82,13 @@ namespace Glasses
         public double DistortionLimit
         {
             get { return dl; }
-            set { dl = value; }
+            set
+            {
+                if (value > 0)
+                {
+                    dl = value;
+                }
+            }
         }
 
         // Eigenschaft Distortion (Wert darf nur zwischen positivem und negativem DistortionLimit liegen) (siehe ANgabe)
@@ -74,7 +103,7 @@ namespace Glasses
                 }
                 else
                 {
-                    s = 0;
+                    s = 0; //Sollte niemals passieren, per def.
                 }
 
             }
@@ -98,14 +127,12 @@ namespace Glasses
         // Timer der den Distortion Wert zwischen den Grenzen hält
         private void Timmy_Tick(object sender, EventArgs e)
         {
-            if (Distortion == DistortionLimit || Distortion == -DistortionLimit)
+            if (Distortion + dd * dir > DistortionLimit || Distortion + dd * dir < -DistortionLimit)
             {
-                dd = -dd;
+                dir = -dir;
             }
-            if (Distortion <= DistortionLimit && Distortion >= -DistortionLimit)
-            {
-                Distortion += dd;
-            }
+
+            Distortion += dd * dir;
 
             InvalidateVisual();
         }
@@ -113,138 +140,78 @@ namespace Glasses
         // Paint Methode zum Zeichnen des Glases
         public override void Paint(PaintingLib.BitmapEditor painting)
         {
+            if ( wa != null)
+            {
+                type = wa.type;
+            }
+
 
             painting.Lock();
 
-
-            Size size = CalcActualSize();
             Point childPos = this.TranslatePoint(new Point(), Parent as PaintingLib.CanvasBase);
             int ox = (int)childPos.X, oy = (int)childPos.Y;
-
-
-
-            int sX = (int)this.Width;
-            int sY = (int)this.Height;
 
             int m = (int)this.Width;
             int n = (int)this.Height;
 
+            //unbenutze Vorlage sichern
             System.Windows.Media.Imaging.WriteableBitmap originalBitmap = painting.Bitmap;
-
             PaintingLib.BitmapEditor originalEditor = new PaintingLib.BitmapEditor(originalBitmap);
 
 
             if (WaterType == WaterGlassType.Welle)
-            { 
-                for (int i = sX - 1; i >= 0; i--)
+            {
+
+                int global_x = 0;
+                int global_y = 0;
+
+                for ( int i = 0; i < m; i++ )
                 {
-                    for (int j = sY - 1; j >= 0; j--)
+                    for ( int j = 0; j < n; j++ )
                     {
+                        //Globale Positionen
+                        global_x = ox + i;
+                        global_y = oy + j;
+                        
+                        //Herkunft
+                        i_orig = (int)((global_x) + this.Distortion * Math.Cos((global_x) * this.WaveDensity));
+                        j_orig = (int)((global_y) + this.Distortion * Math.Sin((global_y) * this.WaveDensity));
 
-                        iorg = (int)((ox + i) + this.Distortion * Math.Cos((i + ox) * this.WaveDensity));
-                        jorg = (int)((oy + j) + this.Distortion * Math.Sin((j + oy) * this.WaveDensity));
+                        c = originalEditor.GetPixel(i_orig, j_orig); 
 
-                        c = originalEditor.GetPixel(iorg, jorg);
-
-                        painting.SetPixel(ox + i, oy + j, c);
-
+                        painting.SetPixel(global_x, global_y, c);
                     }
                 }
             }
 
             else if (WaterType == WaterGlassType.Strudel)
             {
-                /*
-                for (int j = 0; j < sY; j++)
-                {
-                    for (int i = 0; i < sX; i++)
-                    {
-                       // double ir = i - m / 2.0;
-                       // double jr = n / 2.0 - j;
-                          double ir = ((2.0 * i) / m) - 1;
-                          double jr = ((2.0 * j) / n) - 1;
-                          double l = Math.Sqrt(Math.Pow(ir, 2.0) + Math.Pow(jr, 2.0));
-                        //double winkel = Math.Atan2(oy + j, ox + i);
-                        //double winkel = Math.Atan2( j-(n/2.0), i-(m/2.0));
-                        double winkel = Math.Atan2(jr, ir);
-
-                        
-                        if (l < 1.0)
-                        {
-                            iorg = (ox + i) + (int)(0.5 * m * (1 + l * Math.Cos((winkel + 0.1 * (l - 1) * Distortion))));
-                            jorg = (oy + j) + (int)(0.5 * n * (1 + l * Math.Sin((winkel + 0.1 * (l - 1) * Distortion))));
-                        }
-                        else
-                        {
-                            iorg = (ox + i) + (int)(0.5 * m * (1 + l * Math.Cos(winkel)));
-                            jorg = (oy + j) + (int)(0.5 * n * (1 + l * Math.Sin(winkel)));
-                        }
-                        
-
-                        c = painting.GetPixel(iorg, jorg);
-
-                        painting.SetPixel(ox + i, oy + j, c);
-                    }
-                }
-                */
-
-                //Einfaches Drehen um einen festen Winkel
-
-                //System.Windows.Media.Imaging.WriteableBitmap originalBitmap = painting.Bitmap;
-
-                //PaintingLib.BitmapEditor originalEditor = new PaintingLib.BitmapEditor(originalBitmap);
-                
-
                 //Hälfte der kleineren Dimension wird als Radius definiert 
-                int radius = m < n ? (int)(m / 2.0) : (int)(n / 2.0);
-
-                bool eq = false;
+                int rad = m < n ? (int)(m / 2.0) : (int)(n / 2.0);
 
                 //Internes intuitives Koordinatensystem
-                for ( int y = radius; y > -radius; y--)
+                for ( int j = rad; j > -rad; j--)
                 {
-                    for ( int x = -radius; x < radius; x++)
+                    for ( int i = -rad; i < rad; i++)
                     {
-                        if ( x*x + y*y <= radius*radius ) //Pixel im Kreis?
+                        if ( i*i + j*j <= rad*rad ) //einfachere Prüfung für "Pixel im Kreis?"
                         {
-                            double r = Math.Sqrt(x * x + y * y); //Abstand vom Mittelpunkt (einfach darstellbar durch internes Koord-syst.
-                            double alpha = Math.Atan2(y, x); //Winkel zum Mittelpunkt
-                            double deg = (alpha * 180.0) / Math.PI;
-                            deg += Distortion * r; //Drehwinkel
-                            alpha = (deg * Math.PI) / 180.0;
+                            double l = Math.Sqrt(i * i + j * j); //Abstand vom Mittelpunkt (einfach darstellbar durch internes Koord-syst.)
+                            double angle_radians = Math.Atan2(j, i); //Winkel zum Mittelpunkt
+                            double angle_degrees = ((angle_radians * 180.0) / Math.PI) + Distortion * SwirlSpeed * l;
+                            angle_radians = (angle_degrees * Math.PI) / 180.0;
 
                             //Ursprünge der neuen Farben
-                            int newY = (int)(Math.Floor(r * Math.Sin(alpha)));
-                            int newX = (int)(Math.Floor(r * Math.Cos(alpha)));
-
-                            eq = false;
-
-                            if (originalEditor.Equals(painting))
-                            {
-                                eq = true;
-                            }
+                            i_orig = (int)(l * Math.Cos(angle_radians));
+                            j_orig = (int)(l * Math.Sin(angle_radians));
 
                             //Abholen der Farbe im globalen Koordianatensystem
-                            c = originalEditor.GetPixel(ox + (int)(m / 2.0) + newX, oy + (int)(n/2.0) - newY);
-
-
-                            //Untere Hälfte sollte funktionieren (tut sie aber nicht)
-
-                            painting.SetPixel(ox + (int)(m / 2.0) + x, oy + (int)(n / 2.0) - y, c);
-     
-                                //Obere Hälfte wird absichtlich einfarbig gemacht
-                            //    painting.SetPixel(ox + (int)(m / 2.0) + x, oy + (int)(n / 2.0) - y, Colors.Violet);
-                            
-                            // => GetPixel greift auf zuvor gesetzte Farbwerte zu, statt auf die Ursprungswerte, deep copy des BitmapEditors nötig, aber wie??
+                            c = originalEditor.GetPixel(ox + (int)(m / 2.0) + i_orig, oy + (int)(n/2.0) - j_orig);
+                            painting.SetPixel(ox + (int)(m / 2.0) + i, oy + (int)(n / 2.0) - j, c);
                         }
                     }
                 }
-
             }
-
-
-
-
             painting.Unlock();
         }
     }
