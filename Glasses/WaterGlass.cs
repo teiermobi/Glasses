@@ -44,7 +44,7 @@ namespace Glasses
             this.Distortion = 0.0;
             this.DistortionDelta = 1.0;
             this.WaveDensity = 0.1;
-            SwirlSpeed = 1.0;
+            SwirlSpeed = 10.0;
 
             if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this)) timmy.Start();
         }
@@ -208,14 +208,14 @@ namespace Glasses
                     {
                         if ( i*i + j*j <= rad*rad ) //einfachere Prüfung für "Pixel im Kreis?"
                         {
-                            double l = Math.Sqrt(i * i + j * j); //Abstand vom Mittelpunkt (einfach darstellbar durch internes Koord-syst.)
+                            double l = Math.Sqrt(i * i + j * j) / rad; //Abstand vom Mittelpunkt (einfach darstellbar durch internes Koord-syst.)
                             double angle_radians = Math.Atan2(j, i); //Winkel zum Mittelpunkt
-                            double angle_degrees = ((angle_radians * 180.0) / Math.PI) + Distortion * 300 * SwirlSpeed / l;
+                            double angle_degrees = ((angle_radians * 180.0) / Math.PI) + Distortion * SwirlSpeed * (1 - l);
                             angle_radians = (angle_degrees * Math.PI) / 180.0;
 
                             //Ursprünge der neuen Farben
-                            i_orig = (int)(l * Math.Cos(angle_radians));
-                            j_orig = (int)(l * Math.Sin(angle_radians));
+                            i_orig = (int)(l * rad * Math.Cos(angle_radians));
+                            j_orig = (int)(l * rad * Math.Sin(angle_radians));
 
                             //Abholen der Farbe im globalen Koordianatensystem
                             c = originalEditor.GetPixel(ox + (int)(m / 2.0) + i_orig, oy + (int)(n/2.0) - j_orig);
