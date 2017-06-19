@@ -87,6 +87,14 @@ namespace Glasses
                 if (value > 0)
                 {
                     dl = value;
+                    if ( Distortion > dl )
+                    {
+                        Distortion = dl;
+                    }
+                    else if ( Distortion < -dl )
+                    {
+                        Distortion = -dl;
+                    }
                 }
             }
         }
@@ -101,9 +109,13 @@ namespace Glasses
                 {
                     s = value;
                 }
-                else
+                else if ( value > DistortionLimit )
                 {
-                    s = 0; //Sollte niemals passieren, per def.
+                    s = DistortionLimit; //Sollte niemals passieren, per def.
+                }
+                else if ( value < -DistortionLimit )
+                {
+                    s = -DistortionLimit;
                 }
 
             }

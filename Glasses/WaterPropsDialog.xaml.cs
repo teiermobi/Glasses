@@ -21,6 +21,8 @@ namespace Glasses
     {
         WaterGlass glassRef;
 
+        enum WaterGlassProps { DistortionDelta, DistortionLimit, Distortion, WaveDensity };
+
         public WaterPropsDialog( WaterGlass waterGlass )
         {
             InitializeComponent();
@@ -64,9 +66,9 @@ namespace Glasses
             {
                 distortionTextBox.IsEnabled = true;
                 distortionScrollBar.IsEnabled = true;
-                distortionTextBox.Text = glassRef.Distortion.ToString();
+                distortionTextBox.Text = Math.Round(glassRef.Distortion, 1).ToString();
             }
-            waveDensityTextBox.Text = glassRef.WaveDensity.ToString();
+            waveDensityTextBox.Text = Math.Round(glassRef.WaveDensity, 1).ToString();
         }
 
         private List<string> waterGlassType;
@@ -101,48 +103,28 @@ namespace Glasses
 
         private void distortionLimitTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            updateDistortionLimit();
+            updateModel(WaterGlassProps.DistortionLimit);
         }
 
         private void distortionLimitTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if ( e.Key == Key.Enter )
             {
-                updateDistortionLimit();
+                updateModel(WaterGlassProps.DistortionLimit);
             }
-        }
-
-        private void updateDistortionLimit()
-        {
-            double newDisLim = 0.0;
-            if (Double.TryParse(distortionLimitTextBox.Text, out newDisLim) == true)
-            {
-                glassRef.DistortionLimit = newDisLim;
-            }
-            updateInterface();
         }
 
         private void distortionDeltaTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            updateDistortionDelta();
+            updateModel(WaterGlassProps.DistortionDelta);
         }
 
         private void distortionDeltaTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                updateDistortionDelta();
+                updateModel(WaterGlassProps.DistortionDelta);
             }
-        }
-
-        private void updateDistortionDelta()
-        {
-            double newDisDelta = 0.0;
-            if (Double.TryParse(distortionDeltaTextBox.Text, out newDisDelta) == true)
-            {
-                glassRef.DistortionDelta = newDisDelta;
-            }
-            updateInterface();
         }
 
         private void deltascrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -152,6 +134,90 @@ namespace Glasses
                 glassRef.DistortionDelta = Math.Round(glassRef.DistortionDelta + e.OldValue - e.NewValue, 1);
                 updateInterface();
             }
+        }
+
+        private void distortionTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            updateModel(WaterGlassProps.Distortion);
+        }
+
+        private void distortionTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ( e.Key == Key.Enter )
+            {
+                updateModel(WaterGlassProps.Distortion);
+            }
+        }
+
+        private void distortionScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (glassRef != null)
+            {
+                glassRef.Distortion = Math.Round(glassRef.Distortion + e.OldValue - e.NewValue, 1);
+                updateInterface();
+            }
+        }
+
+        private void waveDensityTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            updateModel(WaterGlassProps.WaveDensity);
+        }
+
+        private void waveDensityTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ( e.Key == Key.Enter)
+            {
+                updateModel( WaterGlassProps.WaveDensity );
+            }
+        }
+
+        private void waveDensityScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (glassRef != null)
+            {
+                glassRef.WaveDensity = Math.Round(glassRef.WaveDensity + e.OldValue - e.NewValue, 1);
+                updateInterface();
+            }
+        }
+
+        private void updateModel( WaterGlassProps props )
+        {
+            if ( props == WaterGlassProps.Distortion )
+            {
+                double newDis = 0.0;
+                if (Double.TryParse(distortionTextBox.Text, out newDis) == true)
+                {
+                    glassRef.Distortion = newDis;
+                }
+            }
+
+            else if ( props == WaterGlassProps.DistortionDelta )
+            {
+                double newDisDelta = 0.0;
+                if (Double.TryParse(distortionDeltaTextBox.Text, out newDisDelta) == true)
+                {
+                    glassRef.DistortionDelta = newDisDelta;
+                }
+            }
+
+            else if ( props == WaterGlassProps.DistortionLimit )
+            {
+                double newDisLim = 0.0;
+                if (Double.TryParse(distortionLimitTextBox.Text, out newDisLim) == true)
+                {
+                    glassRef.DistortionLimit = newDisLim;
+                }
+            }
+
+            else if ( props == WaterGlassProps.WaveDensity )
+            {
+                double newDens = 0.0;
+                if (Double.TryParse(waveDensityTextBox.Text, out newDens) == true)
+                {
+                    glassRef.WaveDensity = newDens;
+                }
+            }
+            updateInterface();
         }
     }
 }

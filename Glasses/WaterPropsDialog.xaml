@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Glasses"
         mc:Ignorable="d"
-        Title="Wasser" MinHeight="265" MinWidth="250" SizeToContent="WidthAndHeight" Icon="Sonya-Swarm-Nerd-Glasses.ico">
+        Title="Wasser" MinHeight="265" MinWidth="250" SizeToContent="WidthAndHeight" Icon="images/Sonya-Swarm-Nerd-Glasses.ico">
     <DockPanel>
         <DockPanel DockPanel.Dock="Top"  Margin="5" VerticalAlignment="Top" >
             <Label x:Name="label" Content="Typ: " HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"/>
@@ -25,18 +25,13 @@
         </DockPanel>
         <DockPanel DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top" >
             <Label x:Name="Störung" Content="Störung:" Margin="5" VerticalAlignment="Center" Width="110"/>
-            <TextBox x:Name="distortionTextBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="97"/>
-            <ScrollBar x:Name="distortionScrollBar"  SmallChange="0.1" Maximum="100" Value="80.0" Minimum="0" Width="17" HorizontalAlignment="Right"/>
+            <TextBox x:Name="distortionTextBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="97" LostFocus="distortionTextBox_LostFocus" KeyDown="distortionTextBox_KeyDown"/>
+            <ScrollBar x:Name="distortionScrollBar"  SmallChange="0.1" Maximum="100" Value="80.0" Minimum="0" Width="17" HorizontalAlignment="Right" ValueChanged="distortionScrollBar_ValueChanged"/>
         </DockPanel>
         <DockPanel DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top" >
             <Label x:Name="Wellendichte" Content="Wellendichte:" Margin="5" VerticalAlignment="Center" Width="110"/>
-            <TextBox x:Name="waveDensityTextBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="96"/>
-            <ScrollBar x:Name="waveDensityScrollBar"  SmallChange="0.1" Maximum="100" Value="80.0" Minimum="0" Width="17" HorizontalAlignment="Right"/>
+            <TextBox x:Name="waveDensityTextBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="96" LostFocus="waveDensityTextBox_LostFocus" KeyDown="waveDensityTextBox_KeyDown"/>
+            <ScrollBar x:Name="waveDensityScrollBar"  SmallChange="0.1" Maximum="100" Value="80.0" Minimum="0" Width="17" HorizontalAlignment="Right" ValueChanged="waveDensityScrollBar_ValueChanged"/>
         </DockPanel>
-
-
-
-
-
     </DockPanel>
 </Window>

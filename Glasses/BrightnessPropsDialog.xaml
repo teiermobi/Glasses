@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Glasses"
         mc:Ignorable="d"
-        Title="Helligkeit" MinHeight="140" MinWidth="420" d:DesignWidth="420" d:DesignHeight="110" ResizeMode="NoResize" Width="100" Height="90" Closed="Window_Closed" Icon="Sonya-Swarm-Nerd-Glasses.ico">
+        Title="Helligkeit" MinHeight="140" MinWidth="420" d:DesignWidth="420" d:DesignHeight="110" ResizeMode="NoResize" Width="100" Height="90" Closed="Window_Closed" Icon="images/Sonya-Swarm-Nerd-Glasses.ico">
     <Grid>
         <Slider x:Name="BrightnessSlider" Minimum="0.5" Maximum="8"   TickPlacement="BottomRight" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="313" TickFrequency="0.5" ValueChanged="BrightnessChanged"/>
         <Label Content="400 %" HorizontalAlignment="Left" Margin="338,72,0,0" VerticalAlignment="Top"/>
