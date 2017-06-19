@@ -88,9 +88,7 @@ namespace Glasses
                 {
                     for (int j = 0; j <= N; j++)
                     {
-
                         double value = 0;
-                       
                         TextBox tb = new TextBox();
                         tb.Text = value.ToString();
                         tb.Margin = new Thickness(5, 5, 5, 5);
