@@ -65,6 +65,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="NumericTextBox.cs" />
     <Compile Include="WaterPropsDialog.xaml.cs">
       <DependentUpon>WaterPropsDialog.xaml</DependentUpon>
     </Compile>

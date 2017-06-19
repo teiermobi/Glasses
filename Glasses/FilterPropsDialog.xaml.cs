@@ -21,6 +21,7 @@ namespace Glasses
             GenerateMatrix(5);
         }
 
+
         public class ComboboxItem
         {
             public string Text { get; set; }
@@ -51,7 +52,7 @@ namespace Glasses
 
         public int MaskLength { get { return (int)FilterGlass.main.Mask.GetLongLength(0); }}
 
-        public double MaskValue { get { return (int)FilterGlass.main.Mask.GetValue(0); } }
+        //public double MaskValue { get { return (int)FilterGlass.main.Mask.GetValue(0); } }
 
 
         public void GenerateMatrix(int N)
@@ -66,7 +67,7 @@ namespace Glasses
                         rasterGrid.Rows = FilterGlass.main.Mask.GetLength(0);
                         rasterGrid.Columns = FilterGlass.main.Mask.GetLength(1);
                         double value = FilterGlass.main.Mask[i, j];
-                        TextBox tb = new TextBox();
+                        NumericTextBox tb = new NumericTextBox();
                         tb.Text = value.ToString();
                         tb.Margin = new Thickness(5, 5, 5, 5);
                         tb.HorizontalContentAlignment = HorizontalAlignment.Center;
@@ -89,13 +90,13 @@ namespace Glasses
                     for (int j = 0; j < N; j++)
                     {
                         double value = 0;
-                        TextBox tb = new TextBox();
-                        tb.Text = value.ToString();
-                        tb.Margin = new Thickness(5, 5, 5, 5);
-                        tb.HorizontalContentAlignment = HorizontalAlignment.Center;
-                        tb.VerticalContentAlignment = VerticalAlignment.Center;
-                        tb.Name = ("box" + i + j);
-                        rasterGrid.Children.Add(tb);
+                        NumericTextBox ta = new NumericTextBox();
+                        ta.Text = value.ToString();
+                        ta.Margin = new Thickness(5, 5, 5, 5);
+                        ta.HorizontalContentAlignment = HorizontalAlignment.Center;
+                        ta.VerticalContentAlignment = VerticalAlignment.Center;
+                        ta.Name = ("box" + i + j);
+                        rasterGrid.Children.Add(ta);
                     }
                 }
                 rasterGrid.Columns = N;
