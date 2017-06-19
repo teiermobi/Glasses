@@ -1,6 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Threading;
+using System.Windows.Input;
+
 
 namespace Glasses
 {
@@ -14,13 +22,13 @@ namespace Glasses
 
         public FilterPropsDialog(FilterGlass filterGlass)    // Damit man auf die Werte von FilterGlass zugreifen kann "filterGlass."
         {
-           
+            main = this;
             InitializeComponent();
             comboBoxFilter.SelectedIndex = intOld;  //gespeicherten ComboBox Item Index ausgeben
             this.OffsetDisp.Text = MaskLength.ToString();
         }
 
-
+        internal static FilterPropsDialog main;
         public class ComboboxItem
         {
             public string Text { get; set; }
@@ -78,7 +86,9 @@ namespace Glasses
             }
         }
 
-       
+        
+
+         
 
         public void GenerateDefaultMatrix(int N)
         {
@@ -90,12 +100,18 @@ namespace Glasses
                 {
                     for (int j = 0; j < N; j++)
                     {
-                        //double value = 0;
-                        double[,] oldMask = FilterGlass.main.Mask;
-                        FilterGlass.main.Mask = new double[N,N];
-                        FilterGlass.main.Mask = oldMask;
+                        double value;
+                        //double[,] oldMask = FilterGlass.main.Mask;
+                        //FilterGlass.main.Mask = new double[N,N];
+                        //FilterGlass.main.Mask = oldMask;
+                        if(i < FilterGlass.main.Mask.GetLength(0) && j < FilterGlass.main.Mask.GetLength(1))
+                        {
+                             value = FilterGlass.main.Mask[i, j];
+                        } else
+                        {
+                             value = 0;
+                        }
                         
-                        double value = FilterGlass.main.Mask[i, j];
                         NumericTextBox ta = new NumericTextBox();
                         ta.Text = value.ToString();
                         ta.Margin = new Thickness(5, 5, 5, 5);
