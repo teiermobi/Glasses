@@ -40,7 +40,7 @@ namespace Glasses
             timmy.Tick += Timmy_Tick;
             this.DistortionLimit = 80.0;
             this.Distortion = 0.0;
-            this.DistortionDelta = 0.0;
+            this.DistortionDelta = 1.0;
             this.WaveDensity = 0.1;
 
             if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this)) timmy.Start();
@@ -129,6 +129,7 @@ namespace Glasses
             int m = (int)this.Width;
             int n = (int)this.Height;
 
+          
 
             if (WaterType == WaterGlassType.Welle)
             {
@@ -186,8 +187,15 @@ namespace Glasses
 
                 //Einfaches Drehen um einen festen Winkel
 
+                System.Windows.Media.Imaging.WriteableBitmap originalBitmap = painting.Bitmap;
+
+                PaintingLib.BitmapEditor originalEditor = new PaintingLib.BitmapEditor(originalBitmap);
+                
+
                 //Hälfte der kleineren Dimension wird als Radius definiert 
                 int radius = m < n ? (int)(m / 2.0) : (int)(n / 2.0);
+
+                bool eq = false;
 
                 //Internes intuitives Koordinatensystem
                 for ( int y = radius; y > -radius; y--)
@@ -199,27 +207,31 @@ namespace Glasses
                             double r = Math.Sqrt(x * x + y * y); //Abstand vom Mittelpunkt (einfach darstellbar durch internes Koord-syst.
                             double alpha = Math.Atan2(y, x); //Winkel zum Mittelpunkt
                             double deg = (alpha * 180.0) / Math.PI;
-                            deg += 90.0; //Drehwinkel
+                            deg += Distortion * r; //Drehwinkel
                             alpha = (deg * Math.PI) / 180.0;
 
                             //Ursprünge der neuen Farben
                             int newY = (int)(Math.Floor(r * Math.Sin(alpha)));
                             int newX = (int)(Math.Floor(r * Math.Cos(alpha)));
 
+                            eq = false;
+
+                            if (originalEditor.Equals(painting))
+                            {
+                                eq = true;
+                            }
+
                             //Abholen der Farbe im globalen Koordianatensystem
-                            c = painting.GetPixel(ox + (int)(m / 2.0) + newX, oy + (int)(n/2.0) - newY);
+                            c = originalEditor.GetPixel(ox + (int)(m / 2.0) + newX, oy + (int)(n/2.0) - newY);
 
 
                             //Untere Hälfte sollte funktionieren (tut sie aber nicht)
-                            if (y < 0)
-                            {
-                                painting.SetPixel(ox + (int)(m / 2.0) + x, oy + (int)(n / 2.0) - y, c);
-                            }
-                            else
-                            {      
+
+                            painting.SetPixel(ox + (int)(m / 2.0) + x, oy + (int)(n / 2.0) - y, c);
+     
                                 //Obere Hälfte wird absichtlich einfarbig gemacht
-                                painting.SetPixel(ox + (int)(m / 2.0) + x, oy + (int)(n / 2.0) - y, Colors.Violet);
-                            }
+                            //    painting.SetPixel(ox + (int)(m / 2.0) + x, oy + (int)(n / 2.0) - y, Colors.Violet);
+                            
                             // => GetPixel greift auf zuvor gesetzte Farbwerte zu, statt auf die Ursprungswerte, deep copy des BitmapEditors nötig, aber wie??
                         }
                     }
