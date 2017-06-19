@@ -14,7 +14,7 @@ namespace Glasses
     public class FilterGlass : Glass
     {
         FilterPropsDialog fi;
-        double[,] mask;
+        public double[,] mask;
 
 
         // Initialisierung, Setzen der StandardMaske
@@ -34,6 +34,17 @@ namespace Glasses
         {
             get { return  mask; }
             set { mask = value; }
+        }
+
+        public void ResizeArray(ref double[,] original, int cols)
+        {
+            //create a new 2 dimensional array with
+            //the size we want
+            double[,] newArray = new double[cols, cols];
+            //copy the contents of the old array to the new one
+            Array.Copy(original, newArray, original.Length);
+            //set the original to the new array
+            original = newArray;
         }
 
         // Eigenschaftendialog aufrufen
@@ -61,12 +72,13 @@ namespace Glasses
                 if (fi.Filter_Index == 0)
                 {
                     this.Mask = new double[,] { { -1, 0, -1  }, { 0, 5, 0 }, { -1, 0, -1} };
-                    fi.GenerateMatrix(Mask.GetLength(0));
+                    fi.GenerateMatrix();
+                   
                 }
                 else if (fi.Filter_Index == 1)
                 {
                     this.Mask = new double[,] { { -1, -1, -1 }, { -1, 8, -1 }, { -1, -1, -1 } };
-                    fi.GenerateMatrix(Mask.GetLength(0));
+                    fi.GenerateMatrix();
                 }
             }
             

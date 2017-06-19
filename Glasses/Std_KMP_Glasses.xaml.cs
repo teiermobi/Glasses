@@ -51,7 +51,7 @@ namespace Glasses
         // Wenn das Fenster vergrößert wird, auch das Canvas mit Bild anpassen
         private void WindoW_SizeChanged(object sender, SizeChangedEventArgs e)
         {
- 
+             
             canvasCanvas.MinWidth = canvasGrid.ActualWidth;
             canvasCanvas.MinHeight = canvasGrid.ActualHeight;
             if (WindowState == WindowState.Maximized)

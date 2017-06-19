@@ -6,7 +6,7 @@
     	xmlns:local="clr-namespace:Glasses"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" 
     	mc:Ignorable="d"
-    	Title="Filter" MinWidth="260" MinHeight="260" SizeToContent="WidthAndHeight" Icon="Sonya-Swarm-Nerd-Glasses.ico">
+    	Title="Filter" MinWidth="260" MinHeight="260" SizeToContent="WidthAndHeight" Icon="Images/Sonya-Swarm-Nerd-Glasses.ico">
     <DockPanel>
 
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="5">
