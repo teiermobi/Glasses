@@ -15,6 +15,7 @@ namespace Glasses
         BrightnessPropsDialog bri;
         double Brightness;
 
+        // Konstruktor
         public BrightnessGlass()
         {
          
@@ -44,7 +45,7 @@ namespace Glasses
                if(bri == null)
                 {
                     this.SGBrightness = 2;
-                BrightnessPropsDialog.valueOld = 2;
+                    BrightnessPropsDialog.valueOld = 2;
 
                 } else
                 {

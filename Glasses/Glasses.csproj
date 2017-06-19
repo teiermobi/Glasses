@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Sonya-Swarm-Nerd-Glasses.ico</ApplicationIcon>
+    <ApplicationIcon>Images\Sonya-Swarm-Nerd-Glasses.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>
@@ -136,7 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\PaintingLib.dll" />
-    <Resource Include="Sonya-Swarm-Nerd-Glasses.ico" />
+    <Resource Include="Images\Sonya-Swarm-Nerd-Glasses.ico" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

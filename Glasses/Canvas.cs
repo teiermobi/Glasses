@@ -18,7 +18,7 @@ namespace Glasses
 {
     public class Canvas : PaintingLib.CanvasBase
     {
-     //   Canvas c;
+        // Canvas c;
         public EventHandler<EventArgs> NewMouseEvent;
         public Image IMG;
         public string ISource;
@@ -33,7 +33,7 @@ namespace Glasses
         }
 
 
-        // MouseEventhandler 
+        // MouseEventhandler für MouseDownLocation
         private Point MouseDownLocation;
         private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -51,7 +51,6 @@ namespace Glasses
                     glass.FocusBorderWidth = 5;
                     glass.PaintBorder();
                     glass.IsPressed = 1;
-                //    glass.InvalidateVisual();
 
                 // Wird am Rand des Glases gedrückt
                 } else if (glass.Margin.Left + glass.ActualWidth - 10 <= e.GetPosition(this).X + 10 && glass.Margin.Left + glass.ActualWidth + 10 >= e.GetPosition(this).X - 10 || glass.Margin.Top + glass.ActualHeight - 10 <= e.GetPosition(this).Y + 10 && glass.Margin.Top + glass.ActualHeight + 10 >= e.GetPosition(this).Y - 10)
@@ -128,11 +127,12 @@ namespace Glasses
                     }
                     if (Std_KMP_Glasses.main.checkBox.IsChecked ?? true)
                     {
+                        //Falls die Checkbox für Rahmen aktiv ist, wieder schwarzen Rahmen ums Glas zeichnen
                         glass.FocusBorderColor = Color.FromRgb(0, 0, 0);
                         glass.FocusBorderWidth = 2;
                     }
                     else
-                    {
+                    {   // Falls Checkbox nicht aktiv ist, muss nach dem verschieben oder skalieren kein Rahmen gezeichnet werden, deshalb Rahmenbreite von 0
                         glass.FocusBorderWidth = 0;
                     }
                     glass.PaintBorder();
@@ -159,11 +159,12 @@ namespace Glasses
             DrawingContext dc = dv.RenderOpen();
 
             string bild;
+            // Falls im Textfeld "Tulpen.jpg" steht (Und das ist bei jedem Start der App) Bild aus Ordner Images laden
             if (Std_KMP_Glasses.main.textboxSrc.Text == "Tulpen.jpg")
             {
                 bild = this.ImageSource; // "pack://application:,,,/Images/Tulpen.jpg";
             }
-
+            // Falls nicht "Tulpen.jpg" im Textfeld steht (User hat dann ein anderes Bild selektiert oder den Pfad dazu ins Feld geschrieben), den Text des Feldes als ImageSource verwenden
             else
             {
                 bild = Std_KMP_Glasses.main.textboxSrc.Text;
