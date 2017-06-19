@@ -113,7 +113,7 @@ namespace Glasses
 
         }
 
-        // Filterglas erstellen (vorher Check ob die Checkbox gechecked ist)
+        // Filterglas erstellen (vorher Check ob die Checkbox für Ränder gechecked ist)
         private void btnFilter_Click(object sender, RoutedEventArgs e)
         {
             fi = new FilterGlass();
@@ -132,7 +132,7 @@ namespace Glasses
             fi.InvalidateVisual();
         }
 
-        // Waserglas erstellen (vorher Check ob die Checkbox gechecked ist)
+        // Waserglas erstellen (vorher Check ob die Checkbox für Ränder gechecked ist)
         private void btnWasser_Click(object sender, RoutedEventArgs e)
         {
             wa = new WaterGlass();
@@ -284,11 +284,6 @@ namespace Glasses
         }
 
 
-        private void FilterProps_Click(object sender, RoutedEventArgs e)
-        {
-            FilterPropsDialog fil = new FilterPropsDialog();
-            fil.ShowDialog();
-        }
 
 
     }

@@ -13,5 +13,12 @@ namespace Glasses
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnActivated(EventArgs e)
+        {
+            Glass viewModel = new Glass();
+
+            this.MainWindow.DataContext = viewModel;
+            base.OnActivated(e);
+        }
     }
 }

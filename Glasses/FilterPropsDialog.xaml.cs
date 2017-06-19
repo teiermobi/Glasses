@@ -10,17 +10,17 @@ namespace Glasses
     /// </summary>
     public partial class FilterPropsDialog : Window
     {
-        private string filterName;
+        private int filterindex;
 
-        public FilterPropsDialog()
+        public FilterPropsDialog(FilterGlass filterGlass)    // Damit man auf die Werte von FilterGlass zugreifen kann "filterGlass."
         {
+           
             InitializeComponent();
-
             comboBoxFilter.SelectedIndex = intOld;  //gespeicherten ComboBox Item Index ausgeben
-
             this.OffsetDisp.Text = MaskLength.ToString();
             GenerateMatrix(5);
         }
+
 
         public class ComboboxItem
         {
@@ -50,7 +50,10 @@ namespace Glasses
             }
         }
 
-        public int MaskLength { get { return (int)FilterGlass.main.Mask.GetLongLength(0); } }
+        public int MaskLength { get { return (int)FilterGlass.main.Mask.GetLongLength(0); }}
+
+        //public double MaskValue { get { return (int)FilterGlass.main.Mask.GetValue(0); } }
+
 
         public void GenerateMatrix(int N)
         {
@@ -61,8 +64,10 @@ namespace Glasses
                 {
                     for (int j = 0; j < FilterGlass.main.Mask.GetLength(1); j++)
                     {
+                        rasterGrid.Rows = FilterGlass.main.Mask.GetLength(0);
+                        rasterGrid.Columns = FilterGlass.main.Mask.GetLength(1);
                         double value = FilterGlass.main.Mask[i, j];
-                        TextBox tb = new TextBox();
+                        NumericTextBox tb = new NumericTextBox();
                         tb.Text = value.ToString();
                         tb.Margin = new Thickness(5, 5, 5, 5);
                         tb.HorizontalContentAlignment = HorizontalAlignment.Center;
@@ -74,6 +79,33 @@ namespace Glasses
             }
         }
 
+        public void GenerateDefaultMatrix(int N)
+        {
+            if (rasterGrid != null)
+            {
+                rasterGrid.Children.Clear();
+                
+                for (int i = 0; i < N; i++)
+                {
+                    for (int j = 0; j < N; j++)
+                    {
+                        double value = 0;
+                        NumericTextBox ta = new NumericTextBox();
+                        ta.Text = value.ToString();
+                        ta.Margin = new Thickness(5, 5, 5, 5);
+                        ta.HorizontalContentAlignment = HorizontalAlignment.Center;
+                        ta.VerticalContentAlignment = VerticalAlignment.Center;
+                        ta.Name = ("box" + i + j);
+                        rasterGrid.Children.Add(ta);
+                    }
+                }
+                rasterGrid.Columns = N;
+                rasterGrid.Rows = N ;
+            }
+        }
+
+
+
 
         public void GetMask()
         {
@@ -83,10 +115,10 @@ namespace Glasses
             //}
         }
 
-        public string Filter_Name
+        public int Filter_Index
         {
-            get { return filterName; }
-            set { filterName = value; }
+            get { return filterindex; }
+            set { filterindex = value; }
         }
 
 
@@ -94,29 +126,29 @@ namespace Glasses
 
         private void comboBoxFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (comboBoxFilter.SelectedItem.ToString() == "Kontrast")
+
+            if (comboBoxFilter.SelectedIndex == 0)
             {
-                filterName = "Kontrast";
+                filterindex = 0;
                 intOld = comboBoxFilter.SelectedIndex;
-                //GenerateMatrix(MaskLength);
+                OffsetDisp.Text = "3";
+                
                 Std_KMP_Glasses.main.canvasCanvas.InvalidateVisual();
-                InvalidateVisual();
             }
 
-            else if (comboBoxFilter.SelectedItem.ToString() == "Kanten")
+            else if (comboBoxFilter.SelectedIndex == 1)
             {
-                filterName = "Kanten";
+                filterindex = 1;
                 intOld = comboBoxFilter.SelectedIndex;
-                //GenerateMatrix(MaskLength);
+                OffsetDisp.Text = "3";
                 Std_KMP_Glasses.main.canvasCanvas.InvalidateVisual();
-                InvalidateVisual();
             }
-            GenerateMatrix(MaskLength);
+           
         }
 
         private void OffsetDisp_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+           
         }
 
 
@@ -129,15 +161,18 @@ namespace Glasses
                 int old = int.Parse(OffsetDisp.Text);
                 old -= 1;
                 OffsetDisp.Text = old.ToString();
-                GenerateMatrix(old);
+                comboBoxFilter.SelectedIndex = 2;
+                GenerateDefaultMatrix(old);
             }
             else
             {
                 int New = int.Parse(OffsetDisp.Text);
                 New += 1;
                 OffsetDisp.Text = New.ToString();
-                GenerateMatrix(New);
+                comboBoxFilter.SelectedIndex = 2;
+                GenerateDefaultMatrix(New);
             }
+
         }
 
 
