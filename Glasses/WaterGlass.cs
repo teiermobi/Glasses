@@ -28,7 +28,7 @@ namespace Glasses
 
         double s, dd, d, dl;
         public enum WaterGlassType { Strudel, Welle };
-        WaterGlassType type = WaterGlassType.Strudel; // Strudel Standardmäßig ausgewählt
+        WaterGlassType type = WaterGlassType.Welle; // Strudel Standardmäßig ausgewählt
         int iorg, jorg;
         Color c;
 
@@ -129,10 +129,13 @@ namespace Glasses
             int m = (int)this.Width;
             int n = (int)this.Height;
 
-          
+            System.Windows.Media.Imaging.WriteableBitmap originalBitmap = painting.Bitmap;
+
+            PaintingLib.BitmapEditor originalEditor = new PaintingLib.BitmapEditor(originalBitmap);
+
 
             if (WaterType == WaterGlassType.Welle)
-            {
+            { 
                 for (int i = sX - 1; i >= 0; i--)
                 {
                     for (int j = sY - 1; j >= 0; j--)
@@ -141,7 +144,7 @@ namespace Glasses
                         iorg = (int)((ox + i) + this.Distortion * Math.Cos((i + ox) * this.WaveDensity));
                         jorg = (int)((oy + j) + this.Distortion * Math.Sin((j + oy) * this.WaveDensity));
 
-                        c = painting.GetPixel(iorg, jorg);
+                        c = originalEditor.GetPixel(iorg, jorg);
 
                         painting.SetPixel(ox + i, oy + j, c);
 
@@ -187,9 +190,9 @@ namespace Glasses
 
                 //Einfaches Drehen um einen festen Winkel
 
-                System.Windows.Media.Imaging.WriteableBitmap originalBitmap = painting.Bitmap;
+                //System.Windows.Media.Imaging.WriteableBitmap originalBitmap = painting.Bitmap;
 
-                PaintingLib.BitmapEditor originalEditor = new PaintingLib.BitmapEditor(originalBitmap);
+                //PaintingLib.BitmapEditor originalEditor = new PaintingLib.BitmapEditor(originalBitmap);
                 
 
                 //Hälfte der kleineren Dimension wird als Radius definiert 
