@@ -5,33 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Glasses"
         mc:Ignorable="d"
-        Title="Wasser" MinHeight="265" MinWidth="250" SizeToContent="WidthAndHeight" Icon="images/Sonya-Swarm-Nerd-Glasses.ico">
-    <DockPanel>
-        <DockPanel DockPanel.Dock="Top"  Margin="5" VerticalAlignment="Top" >
-            <Label x:Name="label" Content="Typ: " HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"/>
-            <ComboBox x:Name="waterGlassComboBox" Margin="5" VerticalAlignment="Center" SelectionChanged="waterGlassComboBox_SelectionChanged"/>
-        </DockPanel>
-        <DockPanel DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top" >
-            <Label x:Name="Störungsgrenze" Content="Störungsgrenze:" Margin="5" VerticalAlignment="Center" Width="110"/>
-            <TextBox x:Name="distortionLimitTextBox" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="96" LostFocus="distortionLimitTextBox_LostFocus" KeyDown="distortionLimitTextBox_KeyDown" />
-            <ScrollBar x:Name="distortionLimitScrollBar" SmallChange="0.1" Maximum="100.0" Minimum="-100.0" Value="0.0" Width="17" HorizontalAlignment="Right" ValueChanged="distortionLimitScrollBar_ValueChanged"/>
-        </DockPanel>
-        <DockPanel DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top" >
-            <Label x:Name="Störungsdelta" Content="Störungsdelta:" Margin="5" VerticalAlignment="Center" Width="110"/>
-            <TextBox x:Name="distortionDeltaTextBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="96" LostFocus="distortionDeltaTextBox_LostFocus" KeyDown="distortionDeltaTextBox_KeyDown" />
-            <ScrollBar x:Name="deltascrollBar"  SmallChange="0.1" Maximum="100" Value="80.0" Minimum="0" Width="17" HorizontalAlignment="Right" ValueChanged="deltascrollBar_ValueChanged" />
-            
-            
-        </DockPanel>
-        <DockPanel DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top" >
-            <Label x:Name="Störung" Content="Störung:" Margin="5" VerticalAlignment="Center" Width="110"/>
-            <TextBox x:Name="distortionTextBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="97" LostFocus="distortionTextBox_LostFocus" KeyDown="distortionTextBox_KeyDown"/>
-            <ScrollBar x:Name="distortionScrollBar"  SmallChange="0.1" Maximum="100" Value="80.0" Minimum="0" Width="17" HorizontalAlignment="Right" ValueChanged="distortionScrollBar_ValueChanged"/>
-        </DockPanel>
-        <DockPanel DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top" >
-            <Label x:Name="Wellendichte" Content="Wellendichte:" Margin="5" VerticalAlignment="Center" Width="110"/>
-            <TextBox x:Name="waveDensityTextBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="96" LostFocus="waveDensityTextBox_LostFocus" KeyDown="waveDensityTextBox_KeyDown"/>
-            <ScrollBar x:Name="waveDensityScrollBar"  SmallChange="0.1" Maximum="100" Value="80.0" Minimum="0" Width="17" HorizontalAlignment="Right" ValueChanged="waveDensityScrollBar_ValueChanged"/>
-        </DockPanel>
-    </DockPanel>
+        Title="Wasser" MinHeight="280" MinWidth="250" ResizeMode="CanResizeWithGrip" SizeToContent="WidthAndHeight" Icon="images/Sonya-Swarm-Nerd-Glasses.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="110"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="28"/>
+        </Grid.ColumnDefinitions>
+
+        <Label x:Name="label" Height="32" VerticalContentAlignment="Center" Target="{Binding ElementName=waterGlassComboBox}" Content="_Typ: " HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+        <ComboBox x:Name="waterGlassComboBox" Height="32" VerticalContentAlignment="Center" Margin="0,0,10,0" HorizontalContentAlignment="Center" VerticalAlignment="Center" SelectionChanged="waterGlassComboBox_SelectionChanged" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="Störungsgrenze" Height="32" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Target="{Binding ElementName=distortionLimitTextBox}" Content="Störungs_grenze:" Margin="5" VerticalAlignment="Center"/>
+        <local:NumericDoubleTextBox x:Name="distortionLimitTextBox" Height="32" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" LostFocus="distortionLimitTextBox_LostFocus" KeyDown="distortionLimitTextBox_KeyDown" />
+        <ScrollBar x:Name="distortionLimitScrollBar" HorizontalAlignment="Left" Width="18" Height="32" SmallChange="0.1" Maximum="100.0" Minimum="-100.0" Value="0.0" Grid.Row="1" Grid.Column="2" ValueChanged="distortionLimitScrollBar_ValueChanged"/>
+        <Label x:Name="Störungsdelta" Height="32" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="0" Target="{Binding ElementName=distortionDeltaTextBox}" Content="Störungs_delta:" Margin="5" VerticalAlignment="Center"/>
+        <local:NumericDoubleTextBox x:Name="distortionDeltaTextBox" Height="32" HorizontalContentAlignment="Center" Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center" LostFocus="distortionDeltaTextBox_LostFocus" KeyDown="distortionDeltaTextBox_KeyDown" />
+        <ScrollBar x:Name="deltascrollBar" HorizontalAlignment="Left" Width="18" Grid.Row="2" Grid.Column="2" Height="32" SmallChange="0.1" Maximum="100.0" Minimum="-100.0" Value="0.0" ValueChanged="deltascrollBar_ValueChanged" />
+        <Label x:Name="Störung" Height="32" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="0" Target="{Binding ElementName=distortionTextBox}" Content="_Störung:" Margin="5" VerticalAlignment="Center"/>
+        <local:NumericDoubleTextBox x:Name="distortionTextBox" Height="32" HorizontalContentAlignment="Center" Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" LostFocus="distortionTextBox_LostFocus" KeyDown="distortionTextBox_KeyDown"/>
+        <ScrollBar x:Name="distortionScrollBar" HorizontalAlignment="Left" Width="18" Grid.Row="3" Grid.Column="2" Height="32" SmallChange="0.1" Maximum="100.0" Minimum="-100.0" Value="0.0" ValueChanged="distortionScrollBar_ValueChanged"/>
+        <Label x:Name="Wellendichte" Height="32" VerticalContentAlignment="Center" Grid.Row="4" Grid.Column="0" Target="{Binding ElementName=waveDensityTextBox}" Content="_Wellendichte:" Margin="5" VerticalAlignment="Center"/>
+        <local:NumericDoubleTextBox x:Name="waveDensityTextBox" Height="32" HorizontalContentAlignment="Center" Grid.Row="4" Grid.Column="1" VerticalContentAlignment="Center" LostFocus="waveDensityTextBox_LostFocus" KeyDown="waveDensityTextBox_KeyDown"/>
+        <ScrollBar x:Name="waveDensityScrollBar" HorizontalAlignment="Left" Width="18" Grid.Row="4" Grid.Column="2" Height="32" SmallChange="0.1" Maximum="100.0" Minimum="-100.0" Value="0.0" ValueChanged="waveDensityScrollBar_ValueChanged"/>
+    </Grid>
 </Window>

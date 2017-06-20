@@ -23,6 +23,8 @@ namespace Glasses
 
         enum WaterGlassProps { DistortionDelta, DistortionLimit, Distortion, WaveDensity };
 
+        
+
         public WaterPropsDialog( WaterGlass waterGlass )
         {
             InitializeComponent();
@@ -32,8 +34,6 @@ namespace Glasses
             waterGlassType.Add("Welle");
             waterGlassType.Add("Strudel");
             waterGlassComboBox.ItemsSource = waterGlassType;
-
-            //distortionLimitScrollBar.Value = waterGlass.DistortionLimit;
 
             if ( waterGlass.WaterType == WaterGlassType.Welle)
             {
