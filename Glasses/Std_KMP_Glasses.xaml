@@ -18,7 +18,7 @@
             <ColumnDefinition Width="27*"/>
             <ColumnDefinition Width="85"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Content="Datei:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="27" VerticalContentAlignment="Center" Width="40"/>
+        <Label Grid.Row="0" Target="{Binding ElementName=textboxSrc}" Content="_Datei:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="27" VerticalContentAlignment="Center" Width="40"/>
         <TextBox Grid.Row="0"  x:Name="textboxSrc" Height="23" Margin="55,14,10,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center" Text="Tulpen.jpg"/>
         <Button Grid.Row="0" Grid.Column="1"  Content="_..." HorizontalAlignment="Right" Margin="0,14,55,0" VerticalAlignment="Top" Width="19" Height="23" Click="Button_Click"/>
         <Button Grid.Row="0" Grid.Column="1" x:Name="btnImageLoad" Content="_Laden" HorizontalAlignment="Right" Margin="0,14,5,0" VerticalAlignment="Top" Width="43" Height="23" HorizontalContentAlignment="Center" Click="btnImageLoad_Click"/>

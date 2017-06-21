@@ -10,12 +10,12 @@
     <DockPanel>
 
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="5">
-            <Label x:Name="filter_label" Content="_Filter: " HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <Label x:Name="filter_label" Target="{Binding ElementName=comboBoxFilter}" Content="_Filter: " HorizontalAlignment="Left" VerticalAlignment="Top" />
             <ComboBox x:Name="comboBoxFilter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" ItemsSource="{Binding FilterSource}"  SelectionChanged="comboBoxFilter_SelectionChanged" />
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="5">
-            <Label x:Name="groesse_label" Content="_Größe:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.467,1.077" Height="26" Width="45"/>
+            <Label x:Name="groesse_label" Target="{Binding ElementName=OffsetDisp}" Content="_Größe:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.467,1.077" Height="26" Width="45"/>
             <TextBox x:Name="OffsetDisp" Text="3"  TextChanged="OffsetDisp_TextChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="37" />
             <ScrollBar x:Name="Offset"  SmallChange="1" Maximum="5" Value="3" Minimum="1" ValueChanged="Offset_ValueChanged" Width="17"  />
         </StackPanel>
@@ -38,7 +38,7 @@
                 <TextBox x:Name="textBox13" Margin="5" TextWrapping="NoWrap"  TextAlignment="Center"/>
                 <TextBox x:Name="textBox14" Margin="5" TextWrapping="NoWrap"  TextAlignment="Center"/>
                 <TextBox x:Name="textBox15" Margin="5" TextWrapping="NoWrap"  TextAlignment="Center"/>
-                <TextBox x:Name="textBox16" Margin="5" TextWrapping="NoWrap"  TextAlignment="Center"/> 
+                <TextBox x:Name="textBox16" Margin="5" TextWrapping="NoWrap"  TextAlignment="Center"/>
             </UniformGrid>
 
 

@@ -170,12 +170,19 @@ namespace Glasses
                 bild = Std_KMP_Glasses.main.textboxSrc.Text;
             }
             IMG = new Image();
-            IMG.Source = new BitmapImage(new Uri(bild));
 
-            dc.DrawImage(IMG.Source, new Rect(0, 0, Std_KMP_Glasses.main.canvasCanvas.ActualWidth, Std_KMP_Glasses.main.canvasCanvas.ActualHeight));
-            dc.Close();
-            painting.Render(dv);
+            try
+            {
+                IMG.Source = new BitmapImage(new Uri(bild));
 
+                dc.DrawImage(IMG.Source, new Rect(0, 0, Std_KMP_Glasses.main.canvasCanvas.ActualWidth, Std_KMP_Glasses.main.canvasCanvas.ActualHeight));
+                dc.Close();
+                painting.Render(dv);
+            }
+            catch (System.Exception e)
+            {
+                Std_KMP_Glasses.main.textboxSrc.Text = this.ImageSource;
+            }
         }
     }
 }

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
-//using System.Timers;
 using System.Windows.Input;
 
 namespace Glasses
@@ -15,60 +14,16 @@ namespace Glasses
 
     public class WaterGlass : Glass
     {
-        WaterPropsDialog wa;
-
-        // Aufruf des Eigenschaftendialog
-
-        public override void ShowPropsDialog(object sender, EventArgs e)
-        {
-            wa = new WaterPropsDialog( this );
-            wa.ShowDialog();
-        }
-
+        WaterPropsDialog waterPropsDia;
+        double s; // Distortion
+        double dd; // DistortionDelta
+        double d; // WaveDensity
+        double dl; // DistortionLimit
+        WaterGlassType type = WaterGlassType.Welle;
+        int i_orig, j_orig; //Ort der zukünftigen Farbe
+        Color c; //zukünftige Farbe
+        int dir = 1; //Richtung des DistortionDelta
         internal static DispatcherTimer timmy = new DispatcherTimer();
-
-        double s, dd, d, dl;
-        
-        WaterGlassType type = WaterGlassType.Welle; 
-        int i_orig, j_orig;
-        Color c;
-
-        private int dir = 1;
-        private double speed;
-        // Initialisierung und setzen der Standardwerte 
-        public WaterGlass()
-        {
-            timmy.Interval = new TimeSpan(0, 0, 0, 0, 40); //25 mal pro Sekunde
-            timmy.Tick += Timmy_Tick;
-            this.DistortionLimit = 80.0;
-            this.Distortion = 0.0;
-            this.DistortionDelta = 1.0;
-            this.WaveDensity = 0.1;
-            SwirlSpeed = 10.0;
-
-            if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this)) timmy.Start();
-        }
-
-        public double SwirlSpeed
-        {
-            get
-            {
-                return speed;
-            }
-
-            set
-            {
-                if ( value > 0.0 )
-                {
-                    speed = value;
-                }
-                else
-                {
-                    speed = -value;
-                }
-            }
-        }
-
 
         // Eigenschaft Watertyp um die Wasserarten zu unterscheiden (siehe Angabe)
         public WaterGlassType WaterType
@@ -76,7 +31,6 @@ namespace Glasses
             get { return type; }
             set { type = value; }
         }
-
 
         // Eigenschaft DistortionLimit (siehe Angabe)
         public double DistortionLimit
@@ -87,11 +41,11 @@ namespace Glasses
                 if (value > 0)
                 {
                     dl = value;
-                    if ( Distortion > dl )
+                    if (Distortion > dl)
                     {
                         Distortion = dl;
                     }
-                    else if ( Distortion < -dl )
+                    else if (Distortion < -dl)
                     {
                         Distortion = -dl;
                     }
@@ -109,11 +63,11 @@ namespace Glasses
                 {
                     s = value;
                 }
-                else if ( value > DistortionLimit )
+                else if (value > DistortionLimit)
                 {
                     s = DistortionLimit; //Sollte niemals passieren, per def.
                 }
-                else if ( value < -DistortionLimit )
+                else if (value < -DistortionLimit)
                 {
                     s = -DistortionLimit;
                 }
@@ -135,36 +89,41 @@ namespace Glasses
             set { d = value; }
         }
 
-
-        // Timer der den Distortion Wert zwischen den Grenzen hält
-        private void Timmy_Tick(object sender, EventArgs e)
+        // Initialisierung und setzen der Standardwerte 
+        public WaterGlass()
         {
-            if (Distortion + dd * dir > DistortionLimit || Distortion + dd * dir < -DistortionLimit)
-            {
-                dir = -dir;
-            }
+            timmy.Interval = new TimeSpan(0, 0, 0, 0, 40); //25 mal pro Sekunde
+            timmy.Tick += Timmy_Tick;
+            this.DistortionLimit = 80.0;
+            this.Distortion = 0.0;
+            this.DistortionDelta = 1.0;
+            this.WaveDensity = 0.1;
 
-            Distortion += dd * dir;
+            if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this)) timmy.Start();
+        }
 
-            InvalidateVisual();
+        // Aufruf des Eigenschaftendialog
+        public override void ShowPropsDialog(object sender, EventArgs e)
+        {
+            waterPropsDia = new WaterPropsDialog(this);
+            waterPropsDia.ShowDialog();
         }
 
         // Paint Methode zum Zeichnen des Glases
         public override void Paint(PaintingLib.BitmapEditor painting)
         {
-            if ( wa != null)
-            {
-                type = wa.type;
-            }
-
-
-            painting.Lock();
+            //if (waterPropsDia != null)
+            //{
+                //type = waterPropsDia.type;
+            //}
 
             Point childPos = this.TranslatePoint(new Point(), Parent as PaintingLib.CanvasBase);
             int ox = (int)childPos.X, oy = (int)childPos.Y;
 
             int m = (int)this.Width;
             int n = (int)this.Height;
+
+            painting.Lock();
 
             //unbenutze Vorlage sichern
             System.Windows.Media.Imaging.WriteableBitmap originalBitmap = painting.Bitmap;
@@ -173,7 +132,6 @@ namespace Glasses
 
             if (WaterType == WaterGlassType.Welle)
             {
-
                 int global_x = 0;
                 int global_y = 0;
 
@@ -201,7 +159,7 @@ namespace Glasses
                 //Hälfte der kleineren Dimension wird als Radius definiert 
                 int rad = m < n ? (int)(m / 2.0) : (int)(n / 2.0);
 
-                //Internes intuitives Koordinatensystem
+                //Internes Koordinatensystem 
                 for ( int j = rad; j > -rad; j--)
                 {
                     for ( int i = -rad; i < rad; i++)
@@ -210,7 +168,7 @@ namespace Glasses
                         {
                             double l = Math.Sqrt(i * i + j * j) / rad; //Abstand vom Mittelpunkt (einfach darstellbar durch internes Koord-syst.)
                             double angle_radians = Math.Atan2(j, i); //Winkel zum Mittelpunkt
-                            double angle_degrees = ((angle_radians * 180.0) / Math.PI) + Distortion * SwirlSpeed * (1 - l);
+                            double angle_degrees = ((angle_radians * 180.0) / Math.PI) + Distortion * 10.0 * (1 - l);
                             angle_radians = (angle_degrees * Math.PI) / 180.0;
 
                             //Ursprünge der neuen Farben
@@ -225,6 +183,19 @@ namespace Glasses
                 }
             }
             painting.Unlock();
+        }
+
+        // Timer der den Distortion Wert zwischen den Grenzen hält
+        private void Timmy_Tick(object sender, EventArgs e)
+        {
+            if (Distortion + dd * dir > DistortionLimit || Distortion + dd * dir < -DistortionLimit)
+            {
+                dir = -dir;
+            }
+
+            Distortion += dd * dir;
+
+            InvalidateVisual();
         }
     }
 }

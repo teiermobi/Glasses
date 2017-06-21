@@ -22,17 +22,21 @@
 
         <Label x:Name="label" Height="32" VerticalContentAlignment="Center" Target="{Binding ElementName=waterGlassComboBox}" Content="_Typ: " HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
         <ComboBox x:Name="waterGlassComboBox" Height="32" VerticalContentAlignment="Center" Margin="0,0,10,0" HorizontalContentAlignment="Center" VerticalAlignment="Center" SelectionChanged="waterGlassComboBox_SelectionChanged" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+        
         <Label x:Name="Störungsgrenze" Height="32" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Target="{Binding ElementName=distortionLimitTextBox}" Content="Störungs_grenze:" Margin="5" VerticalAlignment="Center"/>
-        <local:NumericDoubleTextBox x:Name="distortionLimitTextBox" Height="32" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" LostFocus="distortionLimitTextBox_LostFocus" KeyDown="distortionLimitTextBox_KeyDown" />
-        <ScrollBar x:Name="distortionLimitScrollBar" HorizontalAlignment="Left" Width="18" Height="32" SmallChange="0.1" Maximum="100.0" Minimum="-100.0" Value="0.0" Grid.Row="1" Grid.Column="2" ValueChanged="distortionLimitScrollBar_ValueChanged"/>
+        <local:NumericDoubleTextBox x:Name="distortionLimitTextBox" Height="32" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" LostFocus="textBox_LostFocus" KeyDown="textBox_KeyDown" />
+        <ScrollBar x:Name="distortionLimitScrollBar" HorizontalAlignment="Left" Width="18" Height="32" SmallChange="0.1" Maximum="100.0" Minimum="-100.0" Value="0.0" Grid.Row="1" Grid.Column="2" ValueChanged="scrollBar_ValueChanged"/>
+        
         <Label x:Name="Störungsdelta" Height="32" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="0" Target="{Binding ElementName=distortionDeltaTextBox}" Content="Störungs_delta:" Margin="5" VerticalAlignment="Center"/>
-        <local:NumericDoubleTextBox x:Name="distortionDeltaTextBox" Height="32" HorizontalContentAlignment="Center" Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center" LostFocus="distortionDeltaTextBox_LostFocus" KeyDown="distortionDeltaTextBox_KeyDown" />
-        <ScrollBar x:Name="deltascrollBar" HorizontalAlignment="Left" Width="18" Grid.Row="2" Grid.Column="2" Height="32" SmallChange="0.1" Maximum="100.0" Minimum="-100.0" Value="0.0" ValueChanged="deltascrollBar_ValueChanged" />
+        <local:NumericDoubleTextBox x:Name="distortionDeltaTextBox" Height="32" HorizontalContentAlignment="Center" Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center" LostFocus="textBox_LostFocus" KeyDown="textBox_KeyDown" />
+        <ScrollBar x:Name="distortionDeltaScrollBar" HorizontalAlignment="Left" Width="18" Grid.Row="2" Grid.Column="2" Height="32" SmallChange="0.1" Maximum="100.0" Minimum="-100.0" Value="0.0" ValueChanged="scrollBar_ValueChanged" />
+        
         <Label x:Name="Störung" Height="32" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="0" Target="{Binding ElementName=distortionTextBox}" Content="_Störung:" Margin="5" VerticalAlignment="Center"/>
-        <local:NumericDoubleTextBox x:Name="distortionTextBox" Height="32" HorizontalContentAlignment="Center" Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" LostFocus="distortionTextBox_LostFocus" KeyDown="distortionTextBox_KeyDown"/>
-        <ScrollBar x:Name="distortionScrollBar" HorizontalAlignment="Left" Width="18" Grid.Row="3" Grid.Column="2" Height="32" SmallChange="0.1" Maximum="100.0" Minimum="-100.0" Value="0.0" ValueChanged="distortionScrollBar_ValueChanged"/>
+        <local:NumericDoubleTextBox x:Name="distortionTextBox" Height="32" HorizontalContentAlignment="Center" Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" LostFocus="textBox_LostFocus" KeyDown="textBox_KeyDown"/>
+        <ScrollBar x:Name="distortionScrollBar" HorizontalAlignment="Left" Width="18" Grid.Row="3" Grid.Column="2" Height="32" SmallChange="0.1" Maximum="100.0" Minimum="-100.0" Value="0.0" ValueChanged="scrollBar_ValueChanged"/>
+        
         <Label x:Name="Wellendichte" Height="32" VerticalContentAlignment="Center" Grid.Row="4" Grid.Column="0" Target="{Binding ElementName=waveDensityTextBox}" Content="_Wellendichte:" Margin="5" VerticalAlignment="Center"/>
-        <local:NumericDoubleTextBox x:Name="waveDensityTextBox" Height="32" HorizontalContentAlignment="Center" Grid.Row="4" Grid.Column="1" VerticalContentAlignment="Center" LostFocus="waveDensityTextBox_LostFocus" KeyDown="waveDensityTextBox_KeyDown"/>
-        <ScrollBar x:Name="waveDensityScrollBar" HorizontalAlignment="Left" Width="18" Grid.Row="4" Grid.Column="2" Height="32" SmallChange="0.1" Maximum="100.0" Minimum="-100.0" Value="0.0" ValueChanged="waveDensityScrollBar_ValueChanged"/>
+        <local:NumericDoubleTextBox x:Name="waveDensityTextBox" Height="32" HorizontalContentAlignment="Center" Grid.Row="4" Grid.Column="1" VerticalContentAlignment="Center" LostFocus="textBox_LostFocus" KeyDown="textBox_KeyDown"/>
+        <ScrollBar x:Name="waveDensityScrollBar" HorizontalAlignment="Left" Width="18" Grid.Row="4" Grid.Column="2" Height="32" SmallChange="0.1" Maximum="100.0" Minimum="-100.0" Value="0.0" ValueChanged="scrollBar_ValueChanged"/>
     </Grid>
 </Window>
