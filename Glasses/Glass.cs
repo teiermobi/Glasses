@@ -79,7 +79,7 @@ namespace Glasses
         }
 
         // Funktion mit Initialisierung des Kontextmenüs für jedes Glas
-        public void showContextmenu()
+        public virtual void showContextmenu()
         {
             this.ContextMenu = new System.Windows.Controls.ContextMenu();
             MenuItem menuItem1, menuItem2, menuItem3, menuItem4;
@@ -102,7 +102,7 @@ namespace Glasses
         }
 
         // Funktion um Z-Index eines Glases zu ändern (In den Hintergrund)
-        private void Change_ZindexMinus(object sender, EventArgs e)
+        public void Change_ZindexMinus(object sender, EventArgs e)
         {
             int ind = Canvas.GetZIndex(this);
             Canvas.SetZIndex(this, ind - 1 );
@@ -110,7 +110,7 @@ namespace Glasses
 
 
         // Funktion um Z-Index eines Glases zu ändern (In den Vordergrund)
-        private void Change_ZindexPlus(object sender, EventArgs e)
+        public void Change_ZindexPlus(object sender, EventArgs e)
         {
             int ind = Canvas.GetZIndex(this);
             Canvas.SetZIndex(this, ind + 1);
@@ -123,7 +123,7 @@ namespace Glasses
         }
 
         // Funktion um ein Glass aus Canvas zu entfernen
-        private void Props_Remove(object sender, EventArgs e)
+        public void Props_Remove(object sender, EventArgs e)
         {
             Std_KMP_Glasses.main.canvasCanvas.Children.Remove(this);
         }

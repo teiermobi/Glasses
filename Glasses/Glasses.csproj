@@ -73,7 +73,7 @@
     <Compile Include="WaterPropsDialog.xaml.cs">
       <DependentUpon>WaterPropsDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ZoomGlass.cs" />
+    <Compile Include="SWGlass.cs" />
     <Page Include="FilterPropsDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

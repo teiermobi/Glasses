@@ -152,15 +152,15 @@ namespace Glasses
             WaterGlass.timmy.Start();
         }
 
-        // Zoomglas erstellen (vorher Check ob die Checkbox für Ränder gechecked ist)
-        private void btnZoom_Click(object sender, RoutedEventArgs e)
+        // Schwarz-Weißglas erstellen (vorher Check ob die Checkbox für Ränder gechecked ist)
+        private void btnSW_Click(object sender, RoutedEventArgs e)
         {
-            zm = new ZoomGlass();
-            zm.Name = "Zoom" + index++;
+            zm = new SWGlass();
+            zm.Name = "SW" + index++;
             if (Std_KMP_Glasses.main.checkBox.IsChecked ?? true)
             {
-                zm.FocusBorderColor = Color.FromRgb(0, 0, 0);
-                zm.FocusBorderWidth = 2;
+                zm.FocusBorderColor = Color.FromRgb(43, 75, 123);
+                zm.FocusBorderWidth = 3;
                 zm.PaintBorder();
             }
             else
