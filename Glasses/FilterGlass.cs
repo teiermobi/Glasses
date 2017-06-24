@@ -38,12 +38,11 @@ namespace Glasses
 
         public void ResizeArray(ref double[,] original, int cols)
         {
-            //create a new 2 dimensional array with
-            //the size we want
+            // Neues 2 Dimensionales Array
+            // Größer unserer Wahl
             double[,] newArray = new double[cols, cols];
-            //copy the contents of the old array to the new one
+            //Alten Arrayinhalt in neues Array kopieren
             Array.Copy(original, newArray, original.Length);
-            //set the original to the new array
             original = newArray;
         }
 
@@ -64,7 +63,6 @@ namespace Glasses
 
             if (fi == null)
             {
-                //this.Mask = new double[,] { { -1, 0, -1,  }, { 0, 5, 0 }, { -1, 0, -1 } };
                 FilterPropsDialog.intOld = 0;
             }
             else

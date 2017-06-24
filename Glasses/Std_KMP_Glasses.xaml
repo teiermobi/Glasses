@@ -52,8 +52,8 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Row="0" Grid.Column="0" Content="_1" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Bottom"  Click="Button_Click_Demo1"/>
-                <Button Grid.Row="0" Grid.Column="1" Content="_3" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Bottom"  IsCancel="True" Click="Button_Click_Demo3"/>
-                <Button Grid.Row="0" Grid.Column="2" Content="_2" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Bottom" Click="Button_Click_Demo2"/>
+                <Button Grid.Row="0" Grid.Column="1" Content="_2" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Bottom"  IsCancel="True" Click="Button_Click_Demo3"/>
+                <Button Grid.Row="0" Grid.Column="2" Content="_3" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Bottom" Click="Button_Click_Demo2"/>
             </Grid>
         </GroupBox>
     </Grid>
