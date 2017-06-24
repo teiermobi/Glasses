@@ -33,7 +33,7 @@ namespace Glasses
        
 
 
-        public List<string> FilterSource
+        public List<string> FilterSource    // Dropdownliste mit allen Filtern
         {
             get
             {
