@@ -10,6 +10,8 @@ using System.Windows;
 
 namespace Glasses
 {
+
+    // Damit in den Textboxen nur Numerische Werte angenommen werden können.
     public class NumericTextBox : TextBox
     {
         public NumericTextBox()
@@ -29,28 +31,6 @@ namespace Glasses
             if (e.Command == ApplicationCommands.Paste) e.Handled = true;
         }
 
-        //public void GetMaskfromTextbox()
-        //{
-        //    IEnumerable<TextBox> TextBoxes = FilterPropsDialog.main.rasterGrid.Children.OfType<TextBox>();
-           
-                    
-        //    double value;
-        //    foreach (var textbox in TextBoxes)
-        //    {
-        //        for (int x = 0; x < 5; x++)
-        //        {
-        //            for (int y = 0; y < 5; y++)
-        //            {
-        //                FilterGlass.main.Mask = new double[x, y];
-        //                value = Convert.ToDouble(textbox.Text);
-        //                FilterGlass.main.Mask[x, y] = value;
-        //            }
-        //        }
-
-        //    }
-  
-
-        //}
 
         protected override void OnTextChanged(TextChangedEventArgs e)
         {

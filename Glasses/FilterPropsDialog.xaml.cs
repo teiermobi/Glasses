@@ -19,26 +19,18 @@ namespace Glasses
     public partial class FilterPropsDialog : Window
     {
         private int filterindex;
+        public static int intOld;
 
-        public FilterPropsDialog(FilterGlass filterGlass)    // Damit man auf die Werte von FilterGlass zugreifen kann "filterGlass."
+        public FilterPropsDialog(FilterGlass filterGlass)   
         {
             main = this;
             InitializeComponent();
-            comboBoxFilter.SelectedIndex = intOld;  //gespeicherten ComboBox Item Index ausgeben
+            comboBoxFilter.SelectedIndex = intOld;      //gespeicherten ComboBox Item Index ausgeben
             this.OffsetDisp.Text = MaskLength.ToString();
         }
 
         internal static FilterPropsDialog main;
-        public class ComboboxItem
-        {
-            public string Text { get; set; }
-            public object Value { get; set; }
-
-            public override string ToString()
-            {
-                return Text;
-            }
-        }
+       
 
 
         public List<string> FilterSource
@@ -49,6 +41,7 @@ namespace Glasses
                 filterSource.Add("Kontrast");
                 filterSource.Add("Kanten");
                 filterSource.Add("Benutzerdef.");
+                filterSource.Add("Relief");
                 return filterSource;
             }
             set
@@ -59,10 +52,9 @@ namespace Glasses
 
         public int MaskLength { get { return (int)FilterGlass.main.Mask.GetLongLength(0); }}
 
-        //public double MaskValue { get { return (int)FilterGlass.main.Mask.GetValue(0); } }
 
 
-        public void GenerateMatrix()
+        public void GenerateDefaultMatrix()         //Matrix für "Kanten" bzw. "Kontrast".
         {
             if (rasterGrid != null)
             {
@@ -88,22 +80,16 @@ namespace Glasses
 
         
 
-         
-
-        public void GenerateDefaultMatrix(int N)
+        public void GenerateMatrix(int N)        // Matrix erstellen in abhängigkeit von "N" 
         {
             if (rasterGrid != null)
             {
                 rasterGrid.Children.Clear();
-                
                 for (int i = 0; i < N; i++)
                 {
                     for (int j = 0; j < N; j++)
                     {
                         double value;
-                        //double[,] oldMask = FilterGlass.main.Mask;
-                        //FilterGlass.main.Mask = new double[N,N];
-                        //FilterGlass.main.Mask = oldMask;
                         if(i < FilterGlass.main.Mask.GetLength(0) && j < FilterGlass.main.Mask.GetLength(1))
                         {
                              value = FilterGlass.main.Mask[i, j];
@@ -129,13 +115,7 @@ namespace Glasses
 
 
 
-        public void GetMask()
-        {
-            //IEnumerable<Glass> Glasses = FilterPropsDialog.main.Children.OfType<Glass>();
-            //foreach (var glass in Glasses)
-            //{
-            //}
-        }
+     
 
         public int Filter_Index
         {
@@ -144,7 +124,7 @@ namespace Glasses
         }
 
 
-        public static int intOld;
+       
 
         private void comboBoxFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -154,7 +134,6 @@ namespace Glasses
                 filterindex = 0;
                 intOld = comboBoxFilter.SelectedIndex;
                 OffsetDisp.Text = "3";
-                
                 Std_KMP_Glasses.main.canvasCanvas.InvalidateVisual();
             }
 
@@ -165,7 +144,14 @@ namespace Glasses
                 OffsetDisp.Text = "3";
                 Std_KMP_Glasses.main.canvasCanvas.InvalidateVisual();
             }
-           
+            else if (comboBoxFilter.SelectedIndex == 3)
+            {
+                filterindex = 3;
+                intOld = comboBoxFilter.SelectedIndex;
+                OffsetDisp.Text = "3";
+                Std_KMP_Glasses.main.canvasCanvas.InvalidateVisual();
+            }
+
         }
 
         private void OffsetDisp_TextChanged(object sender, TextChangedEventArgs e)
@@ -180,11 +166,11 @@ namespace Glasses
 
             if (e.NewValue > e.OldValue)
             {
-                int old = int.Parse(OffsetDisp.Text);
-                old -= 1;
-                OffsetDisp.Text = old.ToString();
+                int Old = int.Parse(OffsetDisp.Text);
+                Old -= 1;
+                OffsetDisp.Text = Old.ToString();
                 comboBoxFilter.SelectedIndex = 2;
-                GenerateDefaultMatrix(old);
+                GenerateMatrix(Old);
             }
             else
             {
@@ -192,7 +178,7 @@ namespace Glasses
                 New += 1;
                 OffsetDisp.Text = New.ToString();
                 comboBoxFilter.SelectedIndex = 2;
-                GenerateDefaultMatrix(New);
+                GenerateMatrix(New);
             }
 
         }

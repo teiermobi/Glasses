@@ -72,13 +72,18 @@ namespace Glasses
                 if (fi.Filter_Index == 0)
                 {
                     this.Mask = new double[,] { { -1, 0, -1  }, { 0, 5, 0 }, { -1, 0, -1} };
-                    fi.GenerateMatrix();
+                    fi.GenerateDefaultMatrix();
                    
                 }
                 else if (fi.Filter_Index == 1)
                 {
                     this.Mask = new double[,] { { -1, -1, -1 }, { -1, 8, -1 }, { -1, -1, -1 } };
-                    fi.GenerateMatrix();
+                    fi.GenerateDefaultMatrix();
+                }
+                else if (fi.Filter_Index == 3)
+                {
+                    this.Mask = new double[,] { { -2, -1, 0 }, { -1, 1, 1 }, { 0, 1, 2 } };
+                    fi.GenerateDefaultMatrix();
                 }
             }
             
