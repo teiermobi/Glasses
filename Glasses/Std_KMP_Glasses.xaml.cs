@@ -206,6 +206,15 @@ namespace Glasses
             he.showContextmenu();
             he.InvalidateVisual();
 
+            zm = new SWGlass();
+            zm.Name = "SW" + index++;
+            zm.FocusBorderColor = Color.FromRgb(0, 0, 220);
+            zm.FocusBorderWidth = 2;
+            zm.PaintBorder();
+            canvasCanvas.Children.Add(zm);
+            zm.showContextmenu();
+            zm.InvalidateVisual();
+
         }
 
 
@@ -219,7 +228,7 @@ namespace Glasses
             wa.FocusBorderColor = Color.FromRgb(0, 220, 0);
             wa.FocusBorderWidth = 2;
             wa.PaintBorder();
-            wa.Margin = new Thickness(80, 20, 0, 0);
+            wa.Margin = new Thickness(20, 20, 0, 0);
             wa.Width = 200;
             wa.Height = 180;
             canvasCanvas.Children.Add(wa);
@@ -231,12 +240,21 @@ namespace Glasses
             he.FocusBorderColor = Color.FromRgb(0, 220, 0);
             he.FocusBorderWidth = 2;
             he.PaintBorder();
-            he.Margin = new Thickness(190, 120, 0, 0);
+            he.Margin = new Thickness(120, 50, 0, 0);
             he.Width = 90;
             he.Height = 70;
             canvasCanvas.Children.Add(he);
             he.showContextmenu();
             he.InvalidateVisual();
+
+            zm = new SWGlass();
+            zm.Name = "SW" + index++;
+            zm.FocusBorderColor = Color.FromRgb(0, 0, 220);
+            zm.FocusBorderWidth = 2;
+            zm.PaintBorder();
+            canvasCanvas.Children.Add(zm);
+            zm.showContextmenu();
+            zm.InvalidateVisual();
         }
 
 
