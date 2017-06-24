@@ -89,7 +89,7 @@ namespace Glasses
         }
 
 
-        Glass he, fi, wa;
+        Glass he, fi, wa, zm;
         private int index = 1;
 
 
@@ -152,8 +152,28 @@ namespace Glasses
             WaterGlass.timmy.Start();
         }
 
+        // Zoomglas erstellen (vorher Check ob die Checkbox für Ränder gechecked ist)
+        private void btnZoom_Click(object sender, RoutedEventArgs e)
+        {
+            zm = new ZoomGlass();
+            zm.Name = "Zoom" + index++;
+            if (Std_KMP_Glasses.main.checkBox.IsChecked ?? true)
+            {
+                zm.FocusBorderColor = Color.FromRgb(0, 0, 0);
+                zm.FocusBorderWidth = 2;
+                zm.PaintBorder();
+            }
+            else
+            { }
 
-        
+            canvasCanvas.Children.Add(zm);
+            zm.showContextmenu();
+            zm.InvalidateVisual();
+           
+        }
+
+
+
 
         // Demo 1 Gläser (Filter + Helligkeit mit blauen Rändern)
 

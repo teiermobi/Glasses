@@ -35,10 +35,12 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button Margin="5" Grid.Row="0" Grid.Column="0" x:Name="btnHelligkeit" Content="_Helligkeit" VerticalAlignment="Center" Click="btnHelligkeit_Click" />
                 <Button Margin="5" Grid.Row="0" Grid.Column="1" x:Name="btnFilter" Content="_Filter" VerticalAlignment="Center" Click="btnFilter_Click" />
                 <Button Margin="5" Grid.Row="0" Grid.Column="2" x:Name="btnWasser" Content="_Wasser" VerticalAlignment="Center" Click="btnWasser_Click" />
+                <Button Margin="5" Grid.Row="0" Grid.Column="3" x:Name="btnZoom" Content="_Zoom" VerticalAlignment="Center" Click="btnZoom_Click" />
             </Grid>
         </GroupBox>
         <GroupBox Header="Demos" Margin="5" VerticalAlignment="Bottom"  Grid.Row="3" Grid.Column="1"  HorizontalAlignment="Right" >
