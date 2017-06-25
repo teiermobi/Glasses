@@ -18,7 +18,6 @@ namespace Glasses
         // Konstruktor
         public BrightnessGlass()
         {
-         
         }
 
         // Helligkeitswert Eigenschaft
@@ -35,11 +34,9 @@ namespace Glasses
             bri.ShowDialog();
         }
 
-
         // Überschriebene Paint-Methode
         public override void Paint(PaintingLib.BitmapEditor painting)
         {
-
                painting.Lock();
                // Check ob es einen "alten" Wert gibt
                if(bri == null)
@@ -51,15 +48,10 @@ namespace Glasses
                 {
                     this.SGBrightness = bri.Brightness;
                 }
-
-                
-                
                 Size size = CalcActualSize();
                 Point childPos = this.TranslatePoint(new Point(), Parent as Canvas);
                 int ox = (int)childPos.X, oy = (int)childPos.Y;
                 Color c;
-
-
                 for (int i = (int)this.Width - 1; i >= 0; i--)
                     for (int j = (int)this.Height - 1; j >= 0; j--)
                     {
@@ -81,17 +73,8 @@ namespace Glasses
 
                         // Pixel neu einfärben 
                         painting.SetPixel(ox + i, oy + j, Color.FromArgb((byte)cA, (byte)cR, (byte)cG, (byte)cB));
-
-                }
-           
-
-            painting.Unlock();
-     
+                    }
+                painting.Unlock();
         }
-
-   
-
-
-
     }
 }

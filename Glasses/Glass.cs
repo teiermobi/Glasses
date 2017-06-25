@@ -11,8 +11,6 @@ using System.Windows.Controls;
 
 namespace Glasses
 {
-   
-
     public class Glass : PaintingLib.PainterBase
     {
      
@@ -71,8 +69,6 @@ namespace Glasses
             this.InvalidateVisual();
         }
 
-
-        
         public void Removing()
         {
             Std_KMP_Glasses.main.canvasCanvas.Children.Remove(this);

@@ -39,17 +39,6 @@
                 <TextBox x:Name="textBox15" Margin="5" TextWrapping="NoWrap"  TextAlignment="Center"/>
                 <TextBox x:Name="textBox16" Margin="5" TextWrapping="NoWrap"  TextAlignment="Center"/>
             </UniformGrid>
-
-
         </GroupBox>
-
-
-
     </DockPanel>
-
-
-
 </Window>
- 
- 
- 
