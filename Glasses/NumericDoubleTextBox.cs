@@ -9,6 +9,7 @@ using System.Windows;
 
 namespace Glasses
 {
+    // NummericDoubleTextBox Klasse für WasserGlas
     public class NumericDoubleTextBox : TextBox
     {
         public NumericDoubleTextBox()
@@ -16,6 +17,7 @@ namespace Glasses
             CommandManager.AddPreviewExecutedHandler(this, CommandManager_PreviewExecuted);
         }
 
+        // Überschriebene OnPreviewTextInput
         protected override void OnPreviewTextInput(TextCompositionEventArgs e)
         {
             if (!(e.Text.Length == 1 && ((e.Text.ElementAt(0) >= '0' && e.Text.ElementAt(0) <= '9') || e.Text.ElementAt(0) == ',' || e.Text.ElementAt(0) == '-')))

@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace Glasses
 {
-
+    // NumericTextBox Klasse für Filterglas
     // Damit in den Textboxen nur Numerische Werte angenommen werden können.
     public class NumericTextBox : TextBox
     {

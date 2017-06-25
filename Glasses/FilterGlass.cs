@@ -26,9 +26,7 @@ namespace Glasses
         }
 
         internal static FilterGlass main;
-        //private double[,] Mask = new double[3, 3];
 
-        
         // Masken Eigenschaft
         public double[,] Mask
         {
@@ -39,7 +37,7 @@ namespace Glasses
         public void ResizeArray(ref double[,] original, int cols)
         {
             // Neues 2 Dimensionales Array
-            // Größer unserer Wahl
+            // Größe unserer Wahl
             double[,] newArray = new double[cols, cols];
             //Alten Arrayinhalt in neues Array kopieren
             Array.Copy(original, newArray, original.Length);
@@ -67,6 +65,7 @@ namespace Glasses
             }
             else
             {
+                // Maske setzen je nachdem welcher Eintrag des Dropdwons ausgewählt wurde
                 if (fi.Filter_Index == 0)
                 {
                     this.Mask = new double[,] { { -1, 0, -1  }, { 0, 5, 0 }, { -1, 0, -1} };
@@ -92,6 +91,8 @@ namespace Glasses
 
             Color[,] result = new Color[(int)this.Width, (int)this.Height];
             Color imageColor;
+
+       
             for (int i = (int)this.Width - 1; i >= 0; i--)
             {
                 for (int j = (int)this.Height - 1; j >= 0; j--)
@@ -109,15 +110,12 @@ namespace Glasses
 
                             imageColor = painting.GetPixel(ox + imageX, oy + imageY);
 
+                            // Jeweiligen Farbkanal mit Maske multiplizieren
                             red += imageColor.R * Mask[filterX, filterY];
                             green += imageColor.G * Mask[filterX, filterY];
                             blue += imageColor.B * Mask[filterX, filterY];
                            
-                        }
-
-                       
-
-                       
+                        }                      
                     }
                     int r = Math.Min(Math.Max((int)(red), 0), 255);
                     int g = Math.Min(Math.Max((int)(green), 0), 255);

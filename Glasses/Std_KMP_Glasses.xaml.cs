@@ -31,21 +31,10 @@ namespace Glasses
         {
             InitializeComponent();
             main = this;
-            
-         
- 
+
         }
  
         internal static Std_KMP_Glasses main;
-
-
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-
-           // Vielleicht hierdurch das canvasCanvas laden lassen !?
-           //canvasCanvas. ..
-        }
 
 
         // Wenn das Fenster vergrößert wird, auch das Canvas mit Bild anpassen
@@ -54,12 +43,6 @@ namespace Glasses
              
             canvasCanvas.MinWidth = canvasGrid.ActualWidth;
             canvasCanvas.MinHeight = canvasGrid.ActualHeight;
-            if (WindowState == WindowState.Maximized)
-            {
-              // ToDo
-            }
-
-
         }
 
 
@@ -75,8 +58,9 @@ namespace Glasses
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog of = new OpenFileDialog();
-            //For any other formats
+            //Mögliche Bildformate
             of.Filter = "Image Files (*.bmp;*.jpg;*.jpeg,*.png)|*.BMP;*.JPG;*.JPEG;*.PNG";
+            // Setze Standardverzeichnis (Projektordner Images)
             of.InitialDirectory = System.IO.Directory.GetParent(System.IO.Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString() + "Images";
             if (of.ShowDialog() == true)
             {
@@ -99,6 +83,7 @@ namespace Glasses
 
             he = new BrightnessGlass();
             he.Name = "Helligkeit" + index++;
+            // Falls Checkbox gechecked mit Rahmen erstellen
             if (Std_KMP_Glasses.main.checkBox.IsChecked ?? true)
             {
                 he.FocusBorderColor = Color.FromRgb(0, 0, 0);
@@ -118,6 +103,7 @@ namespace Glasses
         {
             fi = new FilterGlass();
             fi.Name = "Filter" + index++;
+            // Falls Checkbox gechecked mit Rahmen erstellen
             if (Std_KMP_Glasses.main.checkBox.IsChecked ?? true)
             {
                 fi.FocusBorderColor = Color.FromRgb(0, 0, 0);
@@ -137,6 +123,7 @@ namespace Glasses
         {
             wa = new WaterGlass();
             wa.Name = "Wasser" + index++;
+            // Falls Checkbox gechecked mit Rahmen erstellen
             if (Std_KMP_Glasses.main.checkBox.IsChecked ?? true)
             {
                 wa.FocusBorderColor = Color.FromRgb(0, 0, 0);
@@ -157,9 +144,11 @@ namespace Glasses
         {
             zm = new SWGlass();
             zm.Name = "SW" + index++;
+
+            // Falls Checkbox gechecked mit Rahmen erstellen
             if (Std_KMP_Glasses.main.checkBox.IsChecked ?? true)
             {
-                zm.FocusBorderColor = Color.FromRgb(43, 75, 123);
+                zm.FocusBorderColor = Color.FromRgb(0, 0, 0);
                 zm.FocusBorderWidth = 3;
                 zm.PaintBorder();
             }
@@ -179,9 +168,10 @@ namespace Glasses
 
         private void Button_Click_Demo1(object sender, RoutedEventArgs e)
         {
-            
+            // Alle Gläser von Canvas entfernen
             canvasCanvas.Children.Clear();
 
+            // Filterglass
             fi = new FilterGlass();
             fi.Name = "Filter" + index++;
             fi.FocusBorderColor = Color.FromRgb(0, 0, 220);
@@ -194,6 +184,7 @@ namespace Glasses
             fi.showContextmenu();
             fi.InvalidateVisual();
 
+            // Helligkeitsglas
             he = new BrightnessGlass();
             he.Name = "Helligkeit" + index++;
             he.FocusBorderColor = Color.FromRgb(0, 0, 220);
@@ -206,6 +197,7 @@ namespace Glasses
             he.showContextmenu();
             he.InvalidateVisual();
 
+            // Schwarz/Weiß Glas
             zm = new SWGlass();
             zm.Name = "SW" + index++;
             zm.FocusBorderColor = Color.FromRgb(0, 0, 220);
@@ -221,8 +213,10 @@ namespace Glasses
         // Demo 2 Gläser (Wasser + Helligkeit mit grünen Rändern)
         private void Button_Click_Demo2(object sender, RoutedEventArgs e)
         {
+            // Alle Gläser von Canvas entfernen
             canvasCanvas.Children.Clear();
 
+            // Wasserglas
             wa = new WaterGlass();
             wa.Name = "Wasser" + index++;
             wa.FocusBorderColor = Color.FromRgb(0, 220, 0);
@@ -235,6 +229,7 @@ namespace Glasses
             wa.showContextmenu();
             wa.InvalidateVisual();
 
+            // Helligkeitsglas
             he = new BrightnessGlass();
             he.Name = "Helligkeit" + index++;
             he.FocusBorderColor = Color.FromRgb(0, 220, 0);
@@ -247,6 +242,7 @@ namespace Glasses
             he.showContextmenu();
             he.InvalidateVisual();
 
+            // Schwarz/Weiß Glas
             zm = new SWGlass();
             zm.Name = "SW" + index++;
             zm.FocusBorderColor = Color.FromRgb(0, 0, 220);
@@ -261,8 +257,10 @@ namespace Glasses
         // Demo 3 Gläser (Filter + Wasser mit grün-blauem Rändern)
         private void Button_Click_Demo3(object sender, RoutedEventArgs e)
         {
+            // Alle Gläser von Canvas entfernen
             canvasCanvas.Children.Clear();
-
+            
+            // Wasserglas
             wa = new WaterGlass();
             wa.Name = "Wasser" + index++;
             wa.FocusBorderColor = Color.FromRgb(0, 220, 220);
@@ -275,7 +273,7 @@ namespace Glasses
             wa.showContextmenu();
             wa.InvalidateVisual();
 
-
+            // Filterglas
             fi = new FilterGlass();
             fi.Name = "Filter" + index++;
             fi.FocusBorderColor = Color.FromRgb(0, 220, 220);
