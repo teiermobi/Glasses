@@ -1,4 +1,5 @@
-﻿<Window x:Name="WindoW" x:Class="Glasses.Std_KMP_Glasses"
+﻿<!-- //Autoren: Meier, Kleber, Pawlowski-->
+    <Window x:Name="WindoW" x:Class="Glasses.Std_KMP_Glasses"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"

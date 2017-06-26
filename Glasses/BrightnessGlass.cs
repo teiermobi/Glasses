@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//Autoren: Meier, Kleber, Pawlowski
+using System;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Threading;
-using System.Windows.Controls;
 
 namespace Glasses
 {

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//Autoren: Meier, Kleber, Pawlowski (Aus Vorlesung kopiert. Quelle: Pösl, Lösungsvorschlag)
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows;
 
 
 namespace Glasses
